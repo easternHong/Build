@@ -13,8 +13,12 @@ open class BuildConfigFile(var path: String) : IConfigFile {
     }
 
     override fun putProperty(key: String, value: String) {
-        property[key] = value
-        property.store(FileOutputStream(File(path)), "")
+        try {
+            property[key] = value
+            property.store(FileOutputStream(path), "")
+        } catch (e: Exception) {
+            Log.i("e:$e")
+        }
     }
 
     private var property = Properties()
@@ -26,6 +30,9 @@ open class BuildConfigFile(var path: String) : IConfigFile {
     private fun init() {
         try {
             val file = File(path)
+            if (!file.exists()) {
+                file.createNewFile()
+            }
             property.load(FileInputStream(file))
         } catch (e: Exception) {
             Log.i("read configFile:$path,$e")
