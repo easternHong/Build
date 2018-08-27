@@ -1,6 +1,7 @@
 package com.main.panel
 
-import com.main.entry.ReadConfigFile
+import com.main.entry.BuildConfigFile
+import com.main.entry.IConfigFile
 import com.main.utils.*
 import com.main.utils.log.LogTextAreaOutputStream
 import com.main.utils.log.TextAreaOutputStream
@@ -12,7 +13,6 @@ import java.awt.event.ComponentEvent
 import java.io.File
 import java.io.PrintStream
 import javax.swing.*
-import javax.swing.text.DefaultCaret
 
 
 object Main {
@@ -26,30 +26,41 @@ object Main {
 //    fun main(args: Array<String>) {
 //        System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
 //        System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
-//        configFile = ReadConfigFile(File("/Users/eastern/project/RemoteBuild/src/config"))
+//        accountFile = when {
+//            OsUtils.isWindows() -> WindowsAccountFile(("/Users/eastern/project/RemoteBuild/src/config"))
+//            OsUtils.isMac() -> MacAccountFile(("/Users/eastern/project/RemoteBuild/src/config"))
+//            else -> ReadConfigFile(File("/Users/eastern/project/RemoteBuild/src/config"))
+//        }
 //        EventQueue.invokeLater({ init() })
 //    }
 
     fun startApplication(file: File, project: com.intellij.openapi.project.Project) {
         System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
         System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
-        configFile = ReadConfigFile(file)
+        accountFile = when {
+            OsUtils.isWindows() -> {
+                BuildConfigFile(System.getProperty("user.home") + "/.build_config")
+            }
+            else -> BuildConfigFile("~/.build_config")
+        }
+
+        configFile = when {
+            OsUtils.isWindows() -> BuildConfigFile(file.absolutePath)
+            else -> BuildConfigFile(file.absolutePath)
+        }
         this.project = project
         EventQueue.invokeLater({ init() })
     }
 
 
-    //    private lateinit var etSvnBranch: JTextArea
-//    private lateinit var etAccount: JTextArea
-//    private lateinit var etPwd: JTextArea
-//    private lateinit var btnOpenDir: JButton
     private lateinit var clearLogBtn: JButton
     private lateinit var jSubmitBtn: JButton
     private lateinit var jFrame: JFrame
     private lateinit var jPanel: JPanel
     private lateinit var scrollPane: JScrollPane
 
-    private lateinit var configFile: ReadConfigFile
+    private lateinit var accountFile: IConfigFile
+    private lateinit var configFile: IConfigFile
 
     private fun init() {
         jFrame = JFrame(project.name + "插件本地服务器构建辅助工具")
@@ -58,19 +69,10 @@ object Main {
                 //need to resize jPanel
                 val frameWidth = jFrame.width
                 jPanel.setBounds(0, 0, jFrame.width, jFrame.height)
-//                clearLogBtn.setBounds(frameWidth - BTN_WIDTH - 10, 130, BTN_WIDTH, 20)
-//                btnOpenDir.setBounds(frameWidth - BTN_WIDTH - 10, 90, BTN_WIDTH, 20)
-
                 val y = jSubmitBtn.bounds.y + jSubmitBtn.bounds.height + 10
                 scrollPane.setBounds(0, y, frameWidth, jFrame.height - y)
-
-//                etSvnBranch.setBounds(70, 90, frameWidth - 70 - BTN_WIDTH - 20, 20)
-
-//                jSubmitBtn.setBounds((frameWidth - BTN_WIDTH) / 2, 130, BTN_WIDTH, 20)
             }
         })
-        //固定大小
-//        jFrame.isResizable = false
         jFrame.minimumSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
         jPanel = JPanel()
         jPanel.layout = null
@@ -90,45 +92,7 @@ object Main {
         jFrame.setLocation(100, 70)
     }
 
-    public fun updateToolTitle(prefix: String, title: String) {
-        jFrame.title = prefix + title
-    }
-
     private fun addWidgets() {
-//        val tvAccount = JLabel("svn账号:")
-//        tvAccount.setBounds(5, 10, 80, 20)
-//        jPanel.add(tvAccount)
-//
-//        etAccount = JTextArea("")
-//        etAccount.setBounds(70, 10, 200, 20)
-//        jPanel.add(etAccount)
-//        etAccount.text = configFile.getProperty("account")
-//
-//        //svn 密码
-//        val tvPwd = JLabel("svn密码:")
-//        tvPwd.setBounds(5, 50, 60, 20)
-//        jPanel.add(tvPwd)
-//
-//        etPwd = JTextArea("")
-//        etPwd.setBounds(70, 50, 200, 20)
-//        jPanel.add(etPwd)
-//        etPwd.text = configFile.getProperty("pwd")
-//
-//        //工作目录
-//        val tvSvnBranch = JLabel("工作目录:")
-//        tvSvnBranch.setBounds(5, 90, 60, 20)
-//        jPanel.add(tvSvnBranch)
-//
-//        etSvnBranch = JTextArea("")
-//        etSvnBranch.setBounds(70, 90, WINDOW_WIDTH - 70 - BTN_WIDTH - 20, 20)
-//        jPanel.add(etSvnBranch)
-//        etSvnBranch.text = configFile.getProperty("workspace")
-//
-//
-//        btnOpenDir = addFileOpen()
-//        btnOpenDir.setBounds(WINDOW_WIDTH - BTN_WIDTH - 10, 90, BTN_WIDTH, 20)
-//        jPanel.add(btnOpenDir)
-
         jSubmitBtn = JButton("Go")
         jSubmitBtn.setBounds(10, 10, BTN_WIDTH, 20)
         jPanel.add(jSubmitBtn)
@@ -173,17 +137,6 @@ object Main {
             showAccountPanel()
         }
 
-        //check dir
-//        if (etSvnBranch.text == null || etSvnBranch.text.isEmpty()) {
-//            showAlert("请选择工作目录")
-//            return
-//        } else {
-//            val file = File(etSvnBranch.text.trim())
-//            if (!file.exists() || !file.isDirectory) {
-//                showAlert("请重新选择工作目录")
-//                return
-//            }
-//        }
 
         configFile.putProperty("workspace", project.basePath!!)
         //备份配置文件。
@@ -200,7 +153,7 @@ object Main {
                     val key = item.split(":")[0]
                     if (key.isEmpty()) continue
                     val value = item
-                            .replace(key + ":", "")
+                            .replace("$key:", "")
                     configFile.putProperty(key, value)
                 }
                 jSubmitBtn.isEnabled = true
@@ -232,7 +185,6 @@ object Main {
         val etAccount = JTextArea("")
         etAccount.setBounds(60, 10, 200 - 60 - 10, 20)
         jPanel.add(etAccount)
-//        etAccount.caretPosition = etAccount.document.length - 1
 
         val lPwd = JLabel("密码：")
         lPwd.setBounds(10, 40, 40, 20)
@@ -240,11 +192,25 @@ object Main {
         val etPwd = JTextArea("")
         etPwd.setBounds(60, 40, 200 - 60 - 10, 20)
         jPanel.add(etPwd)
-//        etPwd.caretPosition = etPwd.document.length - 1
 
         val btn = JButton("确定")
         btn.setBounds((200 - 80) / 2, 70, 80, 20)
         jPanel.add(btn)
+        btn.addActionListener {
+            if (etAccount.text == null || etAccount.text.trim().isEmpty()) {
+                showAlert("账号不能为空")
+                return@addActionListener
+            }
+
+            if (etPwd.text == null || etPwd.text.trim().isEmpty()) {
+                showAlert("密码不能为空")
+                return@addActionListener
+            }
+            //保存账号配置文件
+            accountFile.putProperty("account", etAccount.text.trim())
+            accountFile.putProperty("pwd", etPwd.text.trim())
+
+        }
 
         frame.setBounds(0, 0, 200, 120)
         jPanel.setBounds(0, 0, frame.width, frame.height)
@@ -257,21 +223,21 @@ object Main {
         var goAhead = true
         //revision
         val revision = configFile.getProperty("revision")
-        Log.i("revision:" + revision)
+        Log.i("revision:$revision")
         if (revision.isNullOrEmpty() or !isNumeric(revision)) {
             Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
             goAhead = false
         }
         //svn_url
         val repoUrl = configFile.getProperty("repo_url")
-        Log.i("repo_url:" + repoUrl)
+        Log.i("repo_url:$repoUrl")
         if (repoUrl.isNullOrEmpty()) {
             Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
             goAhead = false
         }
         //patch_file
         val patchFile = configFile.getProperty("patch_file")
-        Log.i("patch_file:" + patchFile)
+        Log.i("patch_file:$patchFile")
         if (!(patchFile != null && File(patchFile).exists())) {
             Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
             goAhead = false

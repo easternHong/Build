@@ -33,7 +33,7 @@
         <action id="TestPlugin" class="com.main.entry.EntryPlugin"
                 text="Build Remote" description="Build in local server"
                 popup="true"
-                icon="BuildIcon.ANALYSIS_ACTION">
+        >
             <add-to-group group-id="BuildMenu" anchor="last"/>
         </action>
     </actions>
