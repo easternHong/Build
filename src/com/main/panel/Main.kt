@@ -2,6 +2,7 @@ package com.main.panel
 
 import com.main.entry.BuildConfigFile
 import com.main.entry.IConfigFile
+import com.main.script.Script
 import com.main.utils.*
 import com.main.utils.log.LogTextAreaOutputStream
 import com.main.utils.log.TextAreaOutputStream
@@ -145,8 +146,14 @@ object Main {
             Log.i("**************************************")
 
             if (!checkParameters()) {
-                val list = listOf("/Users/eastern/project/RemoteBuild/script/shell.sh",
-                        configFile.getProperty("workspace")!!).toMutableList()
+                //创建脚本
+                createShellFile()
+                val list = if (OsUtils.isWindows())
+                    listOf("cmd.exe", "/c", project.basePath!! + "/.idea/.shell",
+                            project.basePath!!).toMutableList()
+                else listOf("/bin/hash", "-c", project.basePath!! + "/.idea/.shell",
+                        project.basePath!!).toMutableList()
+
                 val retList = RunCmd.executeShell(list)
                 for (item in retList) {
                     if (item.isEmpty() or !item.contains(":")) continue
@@ -165,6 +172,17 @@ object Main {
             Log.i("*****start remote build*****")
 
         })
+    }
+
+    private fun createShellFile() {
+        val scripFile = File(project.basePath!! + "/.idea/.shell")
+        //创建文件
+        val script = Script.getScript()
+        scripFile.bufferedWriter().use { out ->
+            out.write(script)
+            out.close()
+        }
+        Log.i("create shell file:" + scripFile.exists())
     }
 
     private fun showAccountPanel() {

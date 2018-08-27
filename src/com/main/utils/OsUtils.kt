@@ -3,9 +3,9 @@ package com.main.utils
 
 object OsUtils {
 
-    var OS = ""
+    private var OS = ""
 
-    private fun getOsName(): String {
+    fun getOsName(): String {
         if (OS == "") {
             OS = System.getProperty("os.name"); }
         return OS
