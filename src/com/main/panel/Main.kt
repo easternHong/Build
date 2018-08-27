@@ -147,16 +147,17 @@ object Main {
         TaskManager.execute(Runnable {
             jSubmitBtn.isEnabled = false
             Log.i("**************************************")
-
+            createShellFile()
             if (!checkParameters()) {
                 //创建脚本
-                createShellFile()
                 val list = if (OsUtils.isWindows())
                     listOf("cmd.exe", "/c", project.basePath!! + "/.idea/.shell",
                             project.basePath!!).toMutableList()
-                else listOf("/bin/hash", "-c", project.basePath!! + "/.idea/.shell",
+                else listOf(project.basePath!! + "/.idea/.shell",
                         project.basePath!!).toMutableList()
-
+                if (!OsUtils.isWindows()) {
+                    Runtime.getRuntime().exec("chmod u+x " + project.basePath!! + "/.idea/.shell")
+                }
                 val retList = RunCmd.executeShell(list)
                 for (item in retList) {
                     if (item.isEmpty() or !item.contains(":")) continue
@@ -180,6 +181,9 @@ object Main {
     private fun createShellFile() {
         val scripFile = File(project.basePath!! + "/.idea/.shell")
         //创建文件
+        if (!scripFile.exists()) {
+            scripFile.createNewFile()
+        }
         val script = Script.getScript()
         scripFile.bufferedWriter().use { out ->
             out.write(script)
@@ -262,12 +266,15 @@ object Main {
         val patchFile = configFile.getProperty("patch_file")
         Log.i("patch_file:$patchFile")
         if (!(patchFile != null && File(patchFile).exists())) {
-            Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
+            Log.i(project.basePath + ": can't find patch file")
             goAhead = false
         }
-        //jenkins url
-
-
+        //jenkins url 不需要检测
+//        val jenkinsUrl = configFile.getProperty("jenkins_url")
+//        if (jenkinsUrl == null || jenkinsUrl.isEmpty()) {
+//            Log.i("jenkinsUrl is not exist :$jenkinsUrl")
+//            goAhead = false
+//        }
         return goAhead
     }
 
