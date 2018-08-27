@@ -2,6 +2,7 @@ package com.main.utils
 
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.swing.JLabel
 import javax.swing.JTextPane
 import javax.swing.text.SimpleAttributeSet
 import javax.swing.text.StyleConstants
@@ -24,5 +25,12 @@ object Utils {
     fun printDog() {
         Log.i("")
     }
+}
+
+fun getLabelWidth(lable: JLabel): Int {
+    val font = lable.font // JLabel所使用的字体
+    val text = lable.text // JLabel文字内容
+    val fm = lable.getFontMetrics(font) // 获取字体规格
+    return fm.stringWidth(text) // 宽（像素）
 }
 

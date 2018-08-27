@@ -41,7 +41,7 @@ object Main {
             OsUtils.isWindows() -> {
                 BuildConfigFile(System.getProperty("user.home") + "/.build_config")
             }
-            else -> BuildConfigFile("~/.build_config")
+            else -> BuildConfigFile(System.getProperty("user.home") + "/.build_config")
         }
 
         configFile = when {
@@ -90,6 +90,7 @@ object Main {
         jFrame.isVisible = true
         jFrame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         jFrame.setLocation(100, 70)
+        Log.i("Welcome!!!")
     }
 
     private fun addWidgets() {
@@ -123,20 +124,22 @@ object Main {
     private fun work() {
         //check account
         var isAccountValid = true
-        val account = configFile.getProperty("account")
+        val account = accountFile.getProperty("account")
         if (account == null || account.isEmpty()) {
             isAccountValid = false
+            Log.i("account is empty")
         }
 
-        val pwd = configFile.getProperty("pwd")
+        val pwd = accountFile.getProperty("pwd")
         if (pwd == null || pwd.isEmpty()) {
             isAccountValid = false
+            Log.i("pwd is empty")
         }
 
         if (!isAccountValid) {
             showAccountPanel()
+            return
         }
-
 
         configFile.putProperty("workspace", project.basePath!!)
         //备份配置文件。
@@ -169,8 +172,8 @@ object Main {
 
     private fun showAccountPanel() {
         val frame = JFrame("填写账号&密码")
-        jFrame.isResizable = false
-        frame.minimumSize = Dimension(200, 120)
+        frame.isResizable = false
+        frame.minimumSize = Dimension(200 + BTN_WIDTH, 120)
         val jPanel = JPanel()
         jPanel.layout = null
 
@@ -178,23 +181,30 @@ object Main {
         c.add(jPanel, BorderLayout.CENTER)
         frame.layout = null
         c.add(jPanel)
+        frame.setBounds(0, 0, 200 + BTN_WIDTH, 120)
+        jPanel.setBounds(0, 0, frame.width, frame.height)
+        frame.isVisible = true
+        frame.setLocation(jFrame.x + (jFrame.width - frame.width) / 2,
+                jFrame.y + 20)
+
 
         val lAccount = JLabel("账号：")
-        lAccount.setBounds(10, 10, 40, 20)
+        lAccount.setBounds(10, 10, getLabelWidth(lAccount), 20)
         jPanel.add(lAccount)
         val etAccount = JTextArea("")
-        etAccount.setBounds(60, 10, 200 - 60 - 10, 20)
+        val x = lAccount.x + lAccount.width + 10
+        etAccount.setBounds(x, 10, jPanel.width - x - 10, 20)
         jPanel.add(etAccount)
 
         val lPwd = JLabel("密码：")
-        lPwd.setBounds(10, 40, 40, 20)
+        lPwd.setBounds(10, 40, getLabelWidth(lPwd), 20)
         jPanel.add(lPwd)
         val etPwd = JTextArea("")
-        etPwd.setBounds(60, 40, 200 - 60 - 10, 20)
+        etPwd.setBounds(lPwd.x + lPwd.width + 10, 40, jPanel.width - x - 10, 20)
         jPanel.add(etPwd)
 
         val btn = JButton("确定")
-        btn.setBounds((200 - 80) / 2, 70, 80, 20)
+        btn.setBounds((200 + BTN_WIDTH - 80) / 2, lPwd.y + lPwd.height + 20, BTN_WIDTH, 20)
         jPanel.add(btn)
         btn.addActionListener {
             if (etAccount.text == null || etAccount.text.trim().isEmpty()) {
@@ -209,14 +219,9 @@ object Main {
             //保存账号配置文件
             accountFile.putProperty("account", etAccount.text.trim())
             accountFile.putProperty("pwd", etPwd.text.trim())
-
+            frame.dispose()
         }
 
-        frame.setBounds(0, 0, 200, 120)
-        jPanel.setBounds(0, 0, frame.width, frame.height)
-        frame.isVisible = true
-        frame.setLocation(jFrame.x + (jFrame.width - frame.width) / 2,
-                jFrame.y + 20)
     }
 
     private fun checkParameters(): Boolean {

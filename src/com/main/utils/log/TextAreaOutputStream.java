@@ -33,12 +33,14 @@ public class TextAreaOutputStream extends OutputStream {
 
         if (b == '\n') {
             final String text = sb.toString() + "\n";
-            SwingUtilities.invokeLater(() -> {
-                try {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    try {
 //                    String out = new String(text.getBytes("ISO-8859-1"));
-                    textArea.append(Utils.INSTANCE.getTime() + ":" + text);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        textArea.append(Utils.INSTANCE.getTime() + ":" + text);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             sb.setLength(0);
