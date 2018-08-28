@@ -50,7 +50,7 @@ object Main {
             else -> BuildConfigFile(file.absolutePath)
         }
         this.project = project
-        EventQueue.invokeLater({ init() })
+        init()
     }
 
 
@@ -88,9 +88,12 @@ object Main {
         jFrame.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
         jPanel.setBounds(0, 0, jFrame.width, jFrame.height)
 
-        jFrame.isVisible = true
         jFrame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         jFrame.setLocation(100, 70)
+        EventQueue.invokeLater({
+            jSubmitBtn.isEnabled = !work()
+        })
+        jFrame.isVisible = true
         Log.i("Welcome!!!")
     }
 
@@ -101,7 +104,6 @@ object Main {
         jSubmitBtn.addActionListener {
             work()
         }
-
 
         clearLogBtn = JButton("清空日志")
         clearLogBtn.setBounds(BTN_WIDTH + 20, 10, BTN_WIDTH, 20)
@@ -122,7 +124,7 @@ object Main {
     }
 
 
-    private fun work() {
+    private fun work(): Boolean {
         //check account
         var isAccountValid = true
         val account = accountFile.getProperty("account")
@@ -139,9 +141,12 @@ object Main {
 
         if (!isAccountValid) {
             showAccountPanel()
-            return
+            return false
         }
 
+        if (!checkParameters()) {
+            return false
+        }
         configFile.putProperty("workspace", project.basePath!!)
         //备份配置文件。
         TaskManager.execute(Runnable {
@@ -176,6 +181,7 @@ object Main {
             Log.i("*****start remote build*****")
 
         })
+        return true
     }
 
     private fun createShellFile() {
@@ -269,12 +275,6 @@ object Main {
             Log.i(project.basePath + ": can't find patch file")
             goAhead = false
         }
-        //jenkins url 不需要检测
-//        val jenkinsUrl = configFile.getProperty("jenkins_url")
-//        if (jenkinsUrl == null || jenkinsUrl.isEmpty()) {
-//            Log.i("jenkinsUrl is not exist :$jenkinsUrl")
-//            goAhead = false
-//        }
         return goAhead
     }
 

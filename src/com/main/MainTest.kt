@@ -1,7 +1,8 @@
 package com.main
 
-import com.main.utils.RunCmd
+import okhttp3.*
 import java.io.File
+import java.io.IOException
 
 
 object MainTest {
@@ -26,9 +27,23 @@ object MainTest {
         if (!file.exists()) {
             println("文件不存在")
         }
-        val ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "build_remote.bat", "C:\\Users\\eastern").toMutableList())
-        for (item in ret) {
-            println("...$item")
-        }
+        val requestBody = FormBody.Builder()
+                .add("token", "d8434e068f54c2764f030d710672f728")
+                .add("branch", "4566")
+                .build()
+        val client = OkHttpClient()
+        val request = Request.Builder().url("http://172.26.71.18:8087/job/pluginhomepage/buildWithParameters?token=d8434e068f54c2764f030d710672f728&branch=34567")
+                .addHeader("accept", "application/json")
+                .post(requestBody).build()
+        client.newCall(request)
+                .enqueue(object : Callback {
+                    override fun onFailure(call: Call?, e: IOException?) {
+                        println()
+                    }
+
+                    override fun onResponse(call: Call?, response: Response?) {
+                        println()
+                    }
+                })
     }
 }
