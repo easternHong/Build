@@ -7,11 +7,13 @@ import com.main.utils.*
 import com.main.utils.log.LogTextAreaOutputStream
 import com.main.utils.log.TextAreaOutputStream
 import main.utils.task.TaskManager
+import okhttp3.*
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.EventQueue
 import java.awt.event.ComponentEvent
 import java.io.File
+import java.io.IOException
 import java.io.PrintStream
 import javax.swing.*
 
@@ -23,6 +25,7 @@ object Main {
     private const val BTN_WIDTH = 100
     private var logArea = JTextArea()
     private lateinit var project: com.intellij.openapi.project.Project
+    private val okHttpClient = OkHttpClient()
 //    @JvmStatic
 //    fun main(args: Array<String>) {
 //        System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
@@ -178,6 +181,7 @@ object Main {
             jSubmitBtn.isEnabled = true
             Log.i("**************************************")
             Utils.printDog()
+            makeMission()
             Log.i("*****start remote build*****")
 
         })
@@ -275,6 +279,10 @@ object Main {
             Log.i(project.basePath + ": can't find patch file")
             goAhead = false
         }
+        Log.i("account:" + accountFile.getProperty("account"))
+        Log.i("pwd:" + accountFile.getProperty("pwd"))
+        Log.i("branch:" + getBranchNameFromUrl())
+        Log.i("job:" + getJobNameFromUrl())
         return goAhead
     }
 
@@ -289,40 +297,64 @@ object Main {
         )
     }
 
-//    private fun addFileOpen(): JButton {
-//
-//        val btnOpenDir = JButton("选择目录")
-//
-//        btnOpenDir.isFocusable = false
-//
-//        btnOpenDir.addMouseListener(object : MouseAdapter() {
-//
-//            override fun mouseClicked(e: MouseEvent?) {
-//                //设定当前可选择的文件类型，设定为 DIRECTORIES_ONLY，即只能选择文件夹
-//                //如果没有设定，默认为 FILES_ONLY，即只能选择文件
-//
-//                val chooser = JFileChooser()
-//                chooser.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
-//                //将chooser 设定为 可多选
-//                //如果没有设定，默认为 false，即只能单选
-//                chooser.isMultiSelectionEnabled = true
-//                val value = chooser.showOpenDialog(jFrame)
-//                if (value == JFileChooser.APPROVE_OPTION) {
-//                    // //创建一个文件对象，接收返回值
-//                    // //getSelectedFile()只能返回选中文件夹中的第一个文件夹
-//                    // File dir=chooser.getSelectedFile();
-//                    // System.out.println(dir.getAbsolutePath());
-//                    //getSelectedFiles() 返回所有选中的文件夹
-//                    val dirx = chooser.selectedFiles
-//                    for (i in dirx.indices) {
-//                        println(dirx[i].absolutePath)
-//                        etSvnBranch.text = dirx[i].absolutePath
-//                    }
-//                }
-//            }
-//        })
-//        return btnOpenDir
-//    }
+    private fun getJobNameFromUrl(): String {
+        val url = configFile.getProperty("repo_url")
+        val index = url?.lastIndexOf("/")!!
+        val ret = url.substring(index.plus(1))
+        return ret.substring(0, ret.indexOf("-"))
+    }
 
+    private fun getBranchNameFromUrl(): String {
+        val repoUrl = configFile.getProperty("repo_url")!!
+        return repoUrl.substring(repoUrl.lastIndexOf("-") + 1)
+    }
 
+    private fun makeMission() {
+        val url = getFullUrl(getJobNameFromUrl(),
+                "d8434e068f54c2764f030d710672f728",
+                getBranchNameFromUrl(),
+                accountFile.getProperty("account")!!,
+                accountFile.getProperty("account")!!)
+        val request = Request.Builder().url(url)
+                .addHeader("accept", "application/json")
+                .build()
+        okHttpClient.newCall(request)
+                .enqueue(object : Callback {
+                    override fun onFailure(call: Call?, e: IOException?) {
+                        Log.i("submit mission err:$e")
+                    }
+
+                    override fun onResponse(call: Call?, response: Response?) {
+                        println()
+                        when (response?.code()) {
+                            201 -> {
+                                Log.i("submit mission success:201")
+                            }
+                            200 -> {
+                                Log.i("submit mission success:200")
+                            }
+                            else -> Log.i("submit mission failed?" + response?.code())
+                        }
+                    }
+                })
+
+    }
+
+    private fun getFullUrl(jobName: String, token: String, branch: String, account: String, pwd: String): HttpUrl {
+        return HttpUrl.Builder()
+                .scheme("http")
+                .host("172.26.71.18")
+                .port(8087)
+                .addPathSegment("job")
+                .addPathSegment(jobName)
+                .addPathSegment("buildWithParameters")
+                .addQueryParameter("token", token)
+                .addQueryParameter("branch", branch)
+                .addQueryParameter("svn_account", account)
+                .addQueryParameter("svn_pwd", pwd)
+                // Each addPathSegment separated add a / symbol to the final url
+                // finally my Full URL is:
+                // https://subdomain.apiweb.com/api/v1/students/8873?auth_token=71x23768234hgjwqguygqew
+                .build()
+    }
 }

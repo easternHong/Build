@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f3cb92-20fc-49cf-a2be-342f3b1b4352" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_squareup_okhttp3_okhttp_3_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/main/entry/BuildConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Build.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/MainTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/panel/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/panel/Main.kt" afterDir="false" />
     </list>
@@ -23,23 +22,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
+      <file leaf-file-name="MainTest.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+            <state relative-caret-position="336">
+              <caret line="19" column="61" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="61" />
+              <folding>
+                <element signature="e#18#81#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainTest.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
+      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-              <folding>
-                <element signature="e#18#81#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="282" column="51" selection-start-line="282" selection-start-column="51" selection-end-line="282" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -49,8 +48,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Kotlin File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,6 +65,9 @@
       <find>newc</find>
       <find>%22</find>
       <find>buildWithParameters</find>
+      <find>some</find>
+      <find>makeMission</find>
+      <find>accountFile.getProperty</find>
     </findStrings>
     <replaceStrings>
       <replace>\&quot;</replace>
@@ -98,8 +100,10 @@
         <option value="$PROJECT_DIR$/src/com/main/utils/OsUtils.kt" />
         <option value="$PROJECT_DIR$/src/com/main/script/Script.kt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/com/main/panel/Main.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfig.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfig.java" />
         <option value="$PROJECT_DIR$/src/com/main/MainTest.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/panel/Main.kt" />
       </list>
     </option>
   </component>
@@ -153,6 +157,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -176,14 +182,19 @@
               <item name="Build" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="entry" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Build" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="panel" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -227,7 +238,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.com.main.MainTest">
+  <component name="RunManager" selected="Plugin.Plugin">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -345,59 +356,40 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36630434" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32934782" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32826087" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32826087" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32983193" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10470914" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.11800554" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.18695652" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info id="Designer" order="2" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32983193" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32878152" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="2" />
       <window_info anchor="right" id="ASM" order="3" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983193" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32983193" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16788767" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32983193" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32878152" />
+      <window_info anchor="right" id="Database" order="9" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32826087" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16788767" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.11800554" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -406,8 +398,8 @@
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="ASM" order="6" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32983193" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
@@ -415,7 +407,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Capture Tool" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32983193" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32934782" />
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
@@ -428,24 +420,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="25" />
+      <option name="time" value="38" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="92" column="25" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/utils/log/TextAreaOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -649,7 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/somefile.txt" />
     <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -682,10 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="343" column="28" selection-start-line="343" selection-start-column="24" selection-end-line="343" selection-end-column="31" />
-          <folding>
-            <element signature="e#5892#5893#0" expanded="true" />
-            <element signature="e#5921#5922#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -696,20 +669,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
+    <entry file="file://$PROJECT_DIR$/somefile.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfig.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+        <state relative-caret-position="66">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="336">
+          <caret line="19" column="61" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="61" />
           <folding>
             <element signature="e#18#81#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="282" column="51" selection-start-line="282" selection-start-column="51" selection-end-line="282" selection-end-column="51" />
         </state>
       </provider>
     </entry>
