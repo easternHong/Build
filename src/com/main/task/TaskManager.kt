@@ -1,14 +1,20 @@
 package main.utils.task
 
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 
 object TaskManager {
 
-    private val excutors = Executors.newSingleThreadExecutor()
+    private val executors = Executors.newSingleThreadExecutor()
+    private val scheduledExecutors = Executors.newScheduledThreadPool(1)
 
 
     fun execute(runnable: Runnable) {
-        excutors.submit(runnable)
+        executors.submit(runnable)
+    }
+
+    fun executeDelay(runnable: Runnable, delay: Long) {
+        scheduledExecutors.schedule(runnable, delay, TimeUnit.MILLISECONDS)
     }
 }

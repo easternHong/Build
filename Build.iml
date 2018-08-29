@@ -11,5 +11,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp3:okhttp:3.3.1" level="project" />
+    <orderEntry type="library" name="com.offbytwo.jenkins:jenkins-client:0.3.8" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-annotations:2.3.4" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.3.4" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-core:2.3.4" level="project" />
+    <orderEntry type="library" name="dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="org.apache.logging.log4j:log4j-core:2.5" level="project" />
   </component>
 </module>

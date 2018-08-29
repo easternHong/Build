@@ -6,21 +6,23 @@ import com.main.script.Script
 import com.main.utils.*
 import com.main.utils.log.LogTextAreaOutputStream
 import com.main.utils.log.TextAreaOutputStream
+import com.offbytwo.jenkins.JenkinsServer
+import com.offbytwo.jenkins.model.BuildResult
 import main.utils.task.TaskManager
-import okhttp3.*
+import okhttp3.OkHttpClient
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.EventQueue
 import java.awt.event.ComponentEvent
 import java.io.File
-import java.io.IOException
 import java.io.PrintStream
+import java.net.URI
 import javax.swing.*
 
 
 object Main {
 
-    private const val WINDOW_WIDTH = 700
+    private const val WINDOW_WIDTH = 900
     private const val WINDOW_HEIGHT = 400
     private const val BTN_WIDTH = 100
     private var logArea = JTextArea()
@@ -309,52 +311,68 @@ object Main {
         return repoUrl.substring(repoUrl.lastIndexOf("-") + 1)
     }
 
-    private fun makeMission() {
-        val url = getFullUrl(getJobNameFromUrl(),
-                "d8434e068f54c2764f030d710672f728",
-                getBranchNameFromUrl(),
-                accountFile.getProperty("account")!!,
-                accountFile.getProperty("account")!!)
-        val request = Request.Builder().url(url)
-                .addHeader("accept", "application/json")
-                .build()
-        okHttpClient.newCall(request)
-                .enqueue(object : Callback {
-                    override fun onFailure(call: Call?, e: IOException?) {
-                        Log.i("submit mission err:$e")
-                    }
+    private var buildNumber = -1
+    private var jobName = ""
+    private var branch = ""
+    private lateinit var jenkins: JenkinsServer
 
-                    override fun onResponse(call: Call?, response: Response?) {
-                        println()
-                        when (response?.code()) {
-                            201 -> {
-                                Log.i("submit mission success:201")
-                            }
-                            200 -> {
-                                Log.i("submit mission success:200")
-                            }
-                            else -> Log.i("submit mission failed?" + response?.code())
+    private fun makeMission() {
+        jenkins = JenkinsServer(URI("http://172.26.71.18:8087/"),
+                "yymain",
+                "d8434e068f54c2764f030d710672f728")
+        branch = getBranchNameFromUrl()
+        jobName = getJobNameFromUrl()
+
+        val pMap = HashMap<String, String>()
+        val fMap = HashMap<String, File>()
+        pMap["branch"] = getBranchNameFromUrl()
+        pMap["svn_account"] = accountFile.getProperty("account")!!
+        pMap["svn_pwd"] = accountFile.getProperty("pwd")!!
+        fMap["patch_file"] = File(configFile.getProperty("patch_file"))
+        configFile.putProperty("branch", branch)
+        //trigger a build
+        jenkins.getJob(jobName).build(pMap, fMap)
+
+        Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
+        Log.i("lastBuild.number:" + jenkins.getJob(jobName)?.nextBuildNumber)
+        buildNumber = jenkins.getJob(jobName).nextBuildNumber
+
+        checkBuildStatus()
+    }
+
+    private fun checkBuildStatus() {
+        TaskManager.executeDelay(runnable, 3000)
+    }
+
+
+    private val runnable = Runnable {
+        val list = jenkins.getJob(jobName).allBuilds
+        var goAgain = true
+        for (item in list) {
+            if (item.number == buildNumber) {
+                val ret = item.details().result
+                Log.i("build $buildNumber status:$ret")
+                goAgain = false
+                when (ret) {
+                    BuildResult.BUILDING -> checkBuildStatus()
+                    BuildResult.SUCCESS -> {
+                        Log.i("build ${buildNumber}SUCCESS")
+                        val ar = item.details().artifacts
+                        for (i in ar) {
+                            Log.i("" + i.fileName)
                         }
                     }
-                })
-
+                    else -> {
+                        Log.i("build ${buildNumber}failed,please check")
+                        Log.i("" + item.url)
+                    }
+                }
+            }
+        }
+        if (goAgain) {
+            Log.i("build $buildNumber enqueuing")
+            checkBuildStatus()
+        }
     }
 
-    private fun getFullUrl(jobName: String, token: String, branch: String, account: String, pwd: String): HttpUrl {
-        return HttpUrl.Builder()
-                .scheme("http")
-                .host("172.26.71.18")
-                .port(8087)
-                .addPathSegment("job")
-                .addPathSegment(jobName)
-                .addPathSegment("buildWithParameters")
-                .addQueryParameter("token", token)
-                .addQueryParameter("branch", branch)
-                .addQueryParameter("svn_account", account)
-                .addQueryParameter("svn_pwd", pwd)
-                // Each addPathSegment separated add a / symbol to the final url
-                // finally my Full URL is:
-                // https://subdomain.apiweb.com/api/v1/students/8873?auth_token=71x23768234hgjwqguygqew
-                .build()
-    }
 }
