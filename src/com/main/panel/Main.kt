@@ -18,7 +18,6 @@ import java.awt.Dimension
 import java.awt.EventQueue
 import java.awt.event.ComponentEvent
 import java.io.File
-import java.io.IOException
 import java.io.PrintStream
 import java.net.URI
 import javax.swing.*
@@ -32,17 +31,12 @@ object Main {
     private var logArea = JTextArea()
     private lateinit var project: com.intellij.openapi.project.Project
     private val okHttpClient = OkHttpClient()
-//    @JvmStatic
-//    fun main(args: Array<String>) {
-//        System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
-//        System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
-//        accountFile = when {
-//            OsUtils.isWindows() -> WindowsAccountFile(("/Users/eastern/project/RemoteBuild/src/config"))
-//            OsUtils.isMac() -> MacAccountFile(("/Users/eastern/project/RemoteBuild/src/config"))
-//            else -> ReadConfigFile(File("/Users/eastern/project/RemoteBuild/src/config"))
-//        }
-//        EventQueue.invokeLater({ init() })
-//    }
+    @JvmStatic
+    fun main(args: Array<String>) {
+        System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
+        System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
+        EventQueue.invokeLater({ init() })
+    }
 
     fun startApplication(file: File, project: com.intellij.openapi.project.Project) {
         System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
@@ -99,7 +93,7 @@ object Main {
         jFrame.setBounds(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
         jPanel.setBounds(0, 0, jFrame.width, jFrame.height)
 
-        jFrame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.setLocation(100, 70)
         EventQueue.invokeLater({
             jSubmitBtn.isEnabled = !work()
@@ -109,7 +103,7 @@ object Main {
     }
 
     private fun addWidgets() {
-        jSubmitBtn = JButton("Go")
+        jSubmitBtn = JButton("再次编译")
         jSubmitBtn.setBounds(10, 10, BTN_WIDTH, 30)
         jPanel.add(jSubmitBtn)
         jSubmitBtn.addActionListener {
@@ -149,15 +143,12 @@ object Main {
             isAccountValid = false
             Log.i("pwd is empty")
         }
+//        不用
+//        if (!isAccountValid) {
+//            showAccountPanel()
+//            return false
+//        }
 
-        if (!isAccountValid) {
-            showAccountPanel()
-            return false
-        }
-
-        if (!checkParameters()) {
-            return false
-        }
         configFile.putProperty("workspace", project.basePath!!)
         //备份配置文件。
         TaskManager.execute(Runnable {
@@ -165,6 +156,7 @@ object Main {
             Log.i("**************************************")
             createShellFile()
             if (!checkParameters()) {
+                jSubmitBtn.isEnabled = true
                 //创建脚本
                 val list = if (OsUtils.isWindows())
                     listOf("cmd.exe", "/c", project.basePath!! + "/.idea/.shell",
@@ -183,10 +175,13 @@ object Main {
                             .replace("$key:", "")
                     configFile.putProperty(key, value)
                 }
-                jSubmitBtn.isEnabled = true
-                return@Runnable
+                if (checkParameters()) {
+                    //check again
+                } else {
+                    jSubmitBtn.isEnabled = true
+                    return@Runnable
+                }
             }
-            jSubmitBtn.isEnabled = true
             Log.i("**************************************")
             Utils.printDog()
             makeMission()
@@ -213,7 +208,7 @@ object Main {
     private fun showAccountPanel() {
         val frame = JFrame("填写账号&密码")
         frame.isResizable = false
-        frame.minimumSize = Dimension(200 + BTN_WIDTH, 120)
+        frame.minimumSize = Dimension(200 + BTN_WIDTH, 160)
         val jPanel = JPanel()
         jPanel.layout = null
 
@@ -237,10 +232,10 @@ object Main {
         jPanel.add(etAccount)
 
         val lPwd = JLabel("密码：")
-        lPwd.setBounds(10, 40, getLabelWidth(lPwd), 30)
+        lPwd.setBounds(10, 50, getLabelWidth(lPwd), 30)
         jPanel.add(lPwd)
         val etPwd = JTextArea("")
-        etPwd.setBounds(lPwd.x + lPwd.width + 10, 40, jPanel.width - x - 10, 30)
+        etPwd.setBounds(lPwd.x + lPwd.width + 10, 50, jPanel.width - x - 10, 30)
         jPanel.add(etPwd)
 
         val btn = JButton("确定")
@@ -289,16 +284,14 @@ object Main {
         }
         Log.i("account:" + accountFile.getProperty("account"))
         Log.i("pwd:" + accountFile.getProperty("pwd"))
-        Log.i("branch:" + getBranchNameFromUrl())
-        Log.i("job:" + getJobNameFromUrl())
         return goAhead
     }
 
     private fun showDownloadBtn(show: Boolean) {
         if (show) {
             if (jDownLoadBtn == null) {
-                jDownLoadBtn = JButton("push_file_to_device")
-                jDownLoadBtn!!.setBounds(clearLogBtn.x + clearLogBtn.width + 20, 10, BTN_WIDTH, 30)
+                jDownLoadBtn = JButton("重新拉取so")
+                jDownLoadBtn!!.setBounds(clearLogBtn.x + clearLogBtn.width + 20, 10, BTN_WIDTH * 2, 30)
                 jPanel.add(jSubmitBtn)
                 jDownLoadBtn!!.addActionListener {
                     getArtifacts(finalArtifact!!, Get())
@@ -328,7 +321,7 @@ object Main {
     }
 
     private fun getBranchNameFromUrl(): String {
-        val repoUrl = configFile.getProperty("repo_url")!!
+        val repoUrl = configFile.getProperty("repo_url") ?: return ""
         return repoUrl.substring(repoUrl.lastIndexOf("-") + 1)
                 .replace("android_", "")
     }
@@ -447,7 +440,7 @@ object Main {
             sink.flush()
             sink.close()
             iGet?.success()
-        } catch (e: IOException) {
+        } catch (e: Throwable) {
             iGet?.failed(e)
         }
     }

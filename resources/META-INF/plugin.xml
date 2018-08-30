@@ -1,17 +1,19 @@
 <idea-plugin>
-    <id>com.your.company.unique.plugin.id</id>
-    <name>Plugin display name here</name>
+    <id>com.yy.main</id>
+    <name>remote-build</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      手Y主程序组，插件远程编译辅助工具。
+      原理：把当前开发中插件的svn diff,发送到jenkins编译，并且自动下载，push到手机。
+      缺陷：svn不支持二进制文件diff，所以diff文件，不能带图片<br>
+      <em></em>
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      alpha<br>
+      <em></em>
     ]]>
     </change-notes>
 

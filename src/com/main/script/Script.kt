@@ -34,8 +34,8 @@ object Script {
             "else\n" +
             "\techo \"repo_url:\"\$repo_url\n" +
             "fi\n" +
-            ">diff.patch" +
-            "`svn diff >>diff.patch`\n" +
+            ">diff.patch \n" +
+            "svn diff >>diff.patch\n" +
             "if [ -f \"diff.patch\" ]\n" +
             "then\n" +
             "\techo \"patch_file:\"\$1\"/diff.patch\"\n" +
