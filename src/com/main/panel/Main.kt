@@ -7,14 +7,18 @@ import com.main.utils.*
 import com.main.utils.log.LogTextAreaOutputStream
 import com.main.utils.log.TextAreaOutputStream
 import com.offbytwo.jenkins.JenkinsServer
+import com.offbytwo.jenkins.model.Artifact
 import com.offbytwo.jenkins.model.BuildResult
 import main.utils.task.TaskManager
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okio.Okio
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.EventQueue
 import java.awt.event.ComponentEvent
 import java.io.File
+import java.io.IOException
 import java.io.PrintStream
 import java.net.URI
 import javax.swing.*
@@ -61,6 +65,7 @@ object Main {
 
     private lateinit var clearLogBtn: JButton
     private lateinit var jSubmitBtn: JButton
+
     private lateinit var jFrame: JFrame
     private lateinit var jPanel: JPanel
     private lateinit var scrollPane: JScrollPane
@@ -68,6 +73,7 @@ object Main {
     private lateinit var accountFile: IConfigFile
     private lateinit var configFile: IConfigFile
 
+    private var jDownLoadBtn: JButton? = null
     private fun init() {
         jFrame = JFrame(project.name + "插件本地服务器构建辅助工具")
         jFrame.addComponentListener(object : SimpleComponentListener() {
@@ -104,14 +110,14 @@ object Main {
 
     private fun addWidgets() {
         jSubmitBtn = JButton("Go")
-        jSubmitBtn.setBounds(10, 10, BTN_WIDTH, 20)
+        jSubmitBtn.setBounds(10, 10, BTN_WIDTH, 30)
         jPanel.add(jSubmitBtn)
         jSubmitBtn.addActionListener {
             work()
         }
 
         clearLogBtn = JButton("清空日志")
-        clearLogBtn.setBounds(BTN_WIDTH + 20, 10, BTN_WIDTH, 20)
+        clearLogBtn.setBounds(BTN_WIDTH + 30, 10, BTN_WIDTH, 30)
         jPanel.add(clearLogBtn)
         clearLogBtn.addActionListener {
             logArea.text = ""
@@ -219,26 +225,26 @@ object Main {
         jPanel.setBounds(0, 0, frame.width, frame.height)
         frame.isVisible = true
         frame.setLocation(jFrame.x + (jFrame.width - frame.width) / 2,
-                jFrame.y + 20)
+                jFrame.y + 30)
 
 
         val lAccount = JLabel("账号：")
-        lAccount.setBounds(10, 10, getLabelWidth(lAccount), 20)
+        lAccount.setBounds(10, 10, getLabelWidth(lAccount), 30)
         jPanel.add(lAccount)
         val etAccount = JTextArea("")
         val x = lAccount.x + lAccount.width + 10
-        etAccount.setBounds(x, 10, jPanel.width - x - 10, 20)
+        etAccount.setBounds(x, 10, jPanel.width - x - 10, 30)
         jPanel.add(etAccount)
 
         val lPwd = JLabel("密码：")
-        lPwd.setBounds(10, 40, getLabelWidth(lPwd), 20)
+        lPwd.setBounds(10, 40, getLabelWidth(lPwd), 30)
         jPanel.add(lPwd)
         val etPwd = JTextArea("")
-        etPwd.setBounds(lPwd.x + lPwd.width + 10, 40, jPanel.width - x - 10, 20)
+        etPwd.setBounds(lPwd.x + lPwd.width + 10, 40, jPanel.width - x - 10, 30)
         jPanel.add(etPwd)
 
         val btn = JButton("确定")
-        btn.setBounds((200 + BTN_WIDTH - 80) / 2, lPwd.y + lPwd.height + 20, BTN_WIDTH, 20)
+        btn.setBounds((200 + BTN_WIDTH - 80) / 2, lPwd.y + lPwd.height + 30, BTN_WIDTH, 30)
         jPanel.add(btn)
         btn.addActionListener {
             if (etAccount.text == null || etAccount.text.trim().isEmpty()) {
@@ -288,6 +294,21 @@ object Main {
         return goAhead
     }
 
+    private fun showDownloadBtn(show: Boolean) {
+        if (show) {
+            if (jDownLoadBtn == null) {
+                jDownLoadBtn = JButton("push_file_to_device")
+                jDownLoadBtn!!.setBounds(clearLogBtn.x + clearLogBtn.width + 20, 10, BTN_WIDTH, 30)
+                jPanel.add(jSubmitBtn)
+                jDownLoadBtn!!.addActionListener {
+                    getArtifacts(finalArtifact!!)
+                }
+                jPanel.add(jDownLoadBtn)
+            }
+        }
+        jDownLoadBtn?.isVisible = show
+
+    }
 
     private fun showAlert(text: String) {
         // 消息对话框无返回, 仅做通知作用
@@ -309,6 +330,7 @@ object Main {
     private fun getBranchNameFromUrl(): String {
         val repoUrl = configFile.getProperty("repo_url")!!
         return repoUrl.substring(repoUrl.lastIndexOf("-") + 1)
+                .replace("android_", "")
     }
 
     private var buildNumber = -1
@@ -319,25 +341,28 @@ object Main {
     private fun makeMission() {
         jenkins = JenkinsServer(URI("http://172.26.71.18:8087/"),
                 "yymain",
-                "d8434e068f54c2764f030d710672f728")
+                "f63133c6e88e5ed717c71fc9a02d2d60")
         branch = getBranchNameFromUrl()
         jobName = getJobNameFromUrl()
 
         val pMap = HashMap<String, String>()
         val fMap = HashMap<String, File>()
-        pMap["branch"] = getBranchNameFromUrl()
+        pMap["branch"] = branch
         pMap["svn_account"] = accountFile.getProperty("account")!!
         pMap["svn_pwd"] = accountFile.getProperty("pwd")!!
+
+        pMap["revision"] = configFile.getProperty("revision")!!
         fMap["patch_file"] = File(configFile.getProperty("patch_file"))
         configFile.putProperty("branch", branch)
         //trigger a build
-        jenkins.getJob(jobName).build(pMap, fMap)
-
-        Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
-        Log.i("lastBuild.number:" + jenkins.getJob(jobName)?.nextBuildNumber)
         buildNumber = jenkins.getJob(jobName).nextBuildNumber
+        Log.i("buildNumber.number:$buildNumber")
+        jenkins.getJob(jobName).build(pMap, fMap)
+        Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
 
         checkBuildStatus()
+        buildState = BUILD_STATE_BUILDING
+        jSubmitBtn.isEnabled = false
     }
 
     private fun checkBuildStatus() {
@@ -354,15 +379,27 @@ object Main {
                 Log.i("build $buildNumber status:$ret")
                 goAgain = false
                 when (ret) {
-                    BuildResult.BUILDING -> checkBuildStatus()
+                    null -> checkBuildStatus()
+                    BuildResult.BUILDING -> {
+                        checkBuildStatus()
+                        buildState = BUILD_STATE_BUILDING
+                    }
                     BuildResult.SUCCESS -> {
-                        Log.i("build ${buildNumber}SUCCESS")
-                        val ar = item.details().artifacts
-                        for (i in ar) {
-                            Log.i("" + i.fileName)
+                        buildState = BUILD_STATE_SUCCESS
+                        Log.i("build $buildNumber :SUCCESS")
+                        Log.i("this build cost :" + item.details().duration + "ms")
+                        val artifacts = item.details().artifacts
+                        for (a in artifacts) {
+                            Log.i("get artifacts :" + a.fileName)
                         }
+                        if (artifacts != null && artifacts.size > 0) {
+                            getArtifacts(artifacts[0])
+                        }
+                        jSubmitBtn.isEnabled = true
                     }
                     else -> {
+                        jSubmitBtn.isEnabled = true
+                        buildState = BUILD_STATE_FAILED
                         Log.i("build ${buildNumber}failed,please check")
                         Log.i("" + item.url)
                     }
@@ -374,5 +411,53 @@ object Main {
             checkBuildStatus()
         }
     }
+
+    private var finalArtifact: Artifact? = null
+
+    private fun getArtifacts(artifact: Artifact) {
+        showDownloadBtn(false)
+        finalArtifact = artifact
+        //http://172.26.71.18:8000/out/
+        val uri = "http://172.26.71.18:8087/job/$jobName/lastSuccessfulBuild/artifact/${artifact.relativePath}"
+        //1.下载文件
+        val DOWNLOAD_CHUNK_SIZE = 2048 //Same as Okio Segment.SIZE
+
+        try {
+            val request = Request.Builder().url(uri).build()
+            val response = okHttpClient.newCall(request).execute()
+            val body = response.body()
+            val contentLength = body.contentLength()
+            val source = body.source()
+
+            val file = File(project.basePath + "/.idea/${artifact.fileName}")
+            if (file.exists()) {
+                file.delete()
+            }
+            file.createNewFile()
+            val sink = Okio.buffer(Okio.sink(file))
+
+            var totalRead: Long = 0
+            var read: Long = 0
+            while ({ read = source.read(sink.buffer(), DOWNLOAD_CHUNK_SIZE.toLong());read }() != -1L) {
+                totalRead += read
+                val progress = (totalRead * 100 / contentLength).toInt()
+                Log.i("downloading...$progress")
+            }
+            sink.writeAll(source)
+            sink.flush()
+            sink.close()
+            Log.i("download success")
+        } catch (e: IOException) {
+            Log.i("download err:$e")
+            showDownloadBtn(true)
+        }
+    }
+
+    const val BUILD_STATE_IDLE = 0
+    const val BUILD_STATE_STARTED = 1
+    const val BUILD_STATE_BUILDING = 2
+    const val BUILD_STATE_FAILED = 3
+    const val BUILD_STATE_SUCCESS = 4
+    private var buildState = BUILD_STATE_IDLE
 
 }
