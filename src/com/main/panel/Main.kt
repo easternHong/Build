@@ -368,7 +368,7 @@ object Main {
         var goAgain = true
         for (item in list) {
             if (item.number == buildNumber) {
-                val ret = item.details().result
+                val ret = if (item.details().result == null) BuildResult.BUILDING else item.details().result
                 Log.i("build $buildNumber status:$ret")
                 goAgain = false
                 when (ret) {
