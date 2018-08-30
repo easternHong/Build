@@ -378,7 +378,7 @@ object Main {
                         buildState = BUILD_STATE_BUILDING
                     }
                     BuildResult.SUCCESS -> {
-                        buildState = BUILD_STATE_SUCCESS
+                        buildState = BUILD_STATE_BUILD_SUCCESS
                         Log.i("build $buildNumber :SUCCESS")
                         Log.i("this build cost :" + item.details().duration + "ms")
                         val artifacts = item.details().artifacts
@@ -409,6 +409,11 @@ object Main {
 
     private fun getArtifacts(artifact: Artifact, iGet: IGetArtifact) {
         finalArtifact = artifact
+        val file = File(project.basePath + "/.idea/${artifact.fileName}")
+        if (buildState == BUILD_STATE_PUSH_FAILED && file.exists()) {
+            iGet?.success()
+            return
+        }
         //http://172.26.71.18:8000/out/
         val uri = "http://172.26.71.18:8087/job/$jobName/lastSuccessfulBuild/artifact/${artifact.relativePath}"
         //1.下载文件
@@ -422,7 +427,6 @@ object Main {
             val contentLength = body.contentLength()
             val source = body.source()
 
-            val file = File(project.basePath + "/.idea/${artifact.fileName}")
             if (file.exists()) {
                 file.delete()
             }
@@ -449,7 +453,9 @@ object Main {
     private const val BUILD_STATE_STARTED = 1
     private const val BUILD_STATE_BUILDING = 2
     private const val BUILD_STATE_FAILED = 3
-    private const val BUILD_STATE_SUCCESS = 4
+    private const val BUILD_STATE_BUILD_SUCCESS = 4
+    private const val BUILD_STATE_DOWNLOAD_SUCCESS = 5
+    private const val BUILD_STATE_PUSH_FAILED = 6
     private var buildState = BUILD_STATE_IDLE
 
     interface IGetArtifact {
@@ -470,6 +476,7 @@ object Main {
         }
 
         override fun success() {
+            buildState = BUILD_STATE_DOWNLOAD_SUCCESS
             showDownloadBtn(true)
             Log.i("download success")
             //push to
@@ -487,6 +494,10 @@ object Main {
                 if (input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION) {
                     // do something
                 }
+            } else {
+                buildState = BUILD_STATE_PUSH_FAILED
+                //push 到手机失败，重新push
+                showDownloadBtn(true)
             }
         }
 
