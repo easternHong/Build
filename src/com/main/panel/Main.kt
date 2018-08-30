@@ -301,7 +301,7 @@ object Main {
                 jDownLoadBtn!!.setBounds(clearLogBtn.x + clearLogBtn.width + 20, 10, BTN_WIDTH, 30)
                 jPanel.add(jSubmitBtn)
                 jDownLoadBtn!!.addActionListener {
-                    getArtifacts(finalArtifact!!)
+                    getArtifacts(finalArtifact!!, Get())
                 }
                 jPanel.add(jDownLoadBtn)
             }
@@ -359,7 +359,7 @@ object Main {
         Log.i("buildNumber.number:$buildNumber")
         jenkins.getJob(jobName).build(pMap, fMap)
         Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
-
+        buildState = BUILD_STATE_STARTED
         checkBuildStatus()
         buildState = BUILD_STATE_BUILDING
         jSubmitBtn.isEnabled = false
@@ -393,7 +393,7 @@ object Main {
                             Log.i("get artifacts :" + a.fileName)
                         }
                         if (artifacts != null && artifacts.size > 0) {
-                            getArtifacts(artifacts[0])
+                            getArtifacts(artifacts[0], Get())
                         }
                         jSubmitBtn.isEnabled = true
                     }
@@ -414,8 +414,7 @@ object Main {
 
     private var finalArtifact: Artifact? = null
 
-    private fun getArtifacts(artifact: Artifact) {
-        showDownloadBtn(false)
+    private fun getArtifacts(artifact: Artifact, iGet: IGetArtifact) {
         finalArtifact = artifact
         //http://172.26.71.18:8000/out/
         val uri = "http://172.26.71.18:8087/job/$jobName/lastSuccessfulBuild/artifact/${artifact.relativePath}"
@@ -423,6 +422,7 @@ object Main {
         val DOWNLOAD_CHUNK_SIZE = 2048 //Same as Okio Segment.SIZE
 
         try {
+            iGet?.start()
             val request = Request.Builder().url(uri).build()
             val response = okHttpClient.newCall(request).execute()
             val body = response.body()
@@ -441,23 +441,65 @@ object Main {
             while ({ read = source.read(sink.buffer(), DOWNLOAD_CHUNK_SIZE.toLong());read }() != -1L) {
                 totalRead += read
                 val progress = (totalRead * 100 / contentLength).toInt()
-                Log.i("downloading...$progress")
+                iGet?.progress(progress)
             }
             sink.writeAll(source)
             sink.flush()
             sink.close()
-            Log.i("download success")
+            iGet?.success()
         } catch (e: IOException) {
-            Log.i("download err:$e")
-            showDownloadBtn(true)
+            iGet?.failed(e)
         }
     }
 
-    const val BUILD_STATE_IDLE = 0
-    const val BUILD_STATE_STARTED = 1
-    const val BUILD_STATE_BUILDING = 2
-    const val BUILD_STATE_FAILED = 3
-    const val BUILD_STATE_SUCCESS = 4
+    private const val BUILD_STATE_IDLE = 0
+    private const val BUILD_STATE_STARTED = 1
+    private const val BUILD_STATE_BUILDING = 2
+    private const val BUILD_STATE_FAILED = 3
+    private const val BUILD_STATE_SUCCESS = 4
     private var buildState = BUILD_STATE_IDLE
 
+    interface IGetArtifact {
+        fun start()
+        fun failed(e: Throwable)
+        fun progress(progress: Int)
+        fun success()
+    }
+
+    class Get : IGetArtifact {
+        override fun failed(e: Throwable) {
+            showDownloadBtn(true)
+            Log.i("download failed：$e")
+        }
+
+        override fun progress(progress: Int) {
+            Log.i("download progressing:$progress")
+        }
+
+        override fun success() {
+            showDownloadBtn(true)
+            Log.i("download success")
+            //push to
+            val adbProperties = BuildConfigFile(project.basePath!! + "/local.properties")
+            val adbPath = adbProperties.getProperty("sdk.dir") + "/platform-tools/adb"
+            Log.i("is adb exist? " + File(adbPath).exists())
+            val cmd = listOf(adbPath, "push", project.basePath!! + "/.idea/" + finalArtifact?.fileName,
+                    "/sdcard/yyplugins/" + finalArtifact?.fileName).toMutableList()
+            val retList = RunCmd.executeShell(cmd)
+            Log.i("" + retList)
+            if (retList.size > 0 && retList[0].contains("[100%]")) {
+                // 消息对话框无返回, 仅做通知作用
+                val input = JOptionPane.showOptionDialog(jFrame, "so已经更新到手机",
+                        "编译完成", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
+                if (input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION) {
+                    // do something
+                }
+            }
+        }
+
+        override fun start() {
+            Log.i("download start")
+            showDownloadBtn(false)
+        }
+    }
 }

@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f3cb92-20fc-49cf-a2be-342f3b1b4352" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/MainTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/panel/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/panel/Main.kt" afterDir="false" />
     </list>
@@ -22,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="33" column="9" selection-start-line="33" selection-end-line="33" selection-end-column="45" />
+            <state relative-caret-position="528">
+              <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding>
                 <element signature="e#24#714#0" expanded="true" />
               </folding>
@@ -34,11 +33,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainTest.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JOptionPane.class" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JOptionPane.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="52" column="41" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainTest.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="93" column="9" lean-forward="true" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+            <state relative-caret-position="144">
+              <caret line="95" selection-start-line="95" selection-end-line="95" />
             </state>
           </provider>
         </entry>
@@ -55,7 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>actions</find>
       <find>os.n</find>
       <find>svn</find>
       <find>clearLogBtn</find>
@@ -78,10 +85,14 @@
       <find>revision</find>
       <find>getBranchNameFromUrl</find>
       <find>next</find>
-      <find />
+      <find>please check</find>
       <find>okHttpClient</find>
       <find>jSubmitBtn</find>
       <find>20</find>
+      <find>getArtifacts</find>
+      <find>chm</find>
+      <find>finalArtifact =</find>
+      <find>action</find>
     </findStrings>
     <replaceStrings>
       <replace>\&quot;</replace>
@@ -119,8 +130,8 @@
         <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfig.java" />
         <option value="$PROJECT_DIR$/Build.iml" />
         <option value="$PROJECT_DIR$/src/com/main/task/TaskManager.kt" />
-        <option value="$PROJECT_DIR$/src/com/main/panel/Main.kt" />
         <option value="$PROJECT_DIR$/src/com/main/MainTest.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/panel/Main.kt" />
       </list>
     </option>
   </component>
@@ -213,6 +224,13 @@
               <item name="Build" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="panel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Build" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -263,7 +281,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Plugin.Plugin">
+  <component name="RunManager" selected="Kotlin.com.main.panel.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -294,6 +312,16 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.main.MainTest" />
+      <option name="WORKING_DIRECTORY" />
+    </configuration>
+    <configuration name="com.main.panel.Main" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="Build" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.main.panel.Main" />
       <option name="WORKING_DIRECTORY" />
     </configuration>
     <configuration name="com.main.utils.OsUtils" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
@@ -344,9 +372,11 @@
       <item itemvalue="Plugin.Plugin" />
       <item itemvalue="Kotlin.com.main.utils.OsUtils" />
       <item itemvalue="Kotlin.com.main.MainTest" />
+      <item itemvalue="Kotlin.com.main.panel.Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.com.main.panel.Main" />
         <item itemvalue="Kotlin.com.main.MainTest" />
         <item itemvalue="Kotlin.com.main.utils.OsUtils" />
       </list>
@@ -388,7 +418,8 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.5923913" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09639889" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25263157" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
@@ -403,18 +434,17 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36956522" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.09639889" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25263157" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -423,8 +453,8 @@
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="ASM" order="6" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4673913" />
-      <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.5923913" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
@@ -447,30 +477,15 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/com/main/panel/Main.kt</url>
-          <line>432</line>
-          <properties />
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/com/main/panel/Main.kt</url>
-          <line>431</line>
-          <properties />
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/com/main/MainTest.kt</url>
-          <line>68</line>
+          <line>95</line>
           <properties />
-          <option name="timeStamp" value="85" />
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="86" />
+      <option name="time" value="94" />
     </breakpoint-manager>
     <watches-manager>
-      <configuration name="JetRunConfigurationType">
-        <watch expression="jenkins.getJob(&quot;pluginhomepage&quot;)" />
-      </configuration>
       <configuration name="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
         <watch expression="buildNumber" />
       </configuration>
@@ -478,6 +493,11 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>adbProperties.putProperty(&quot;sdk.dir&quot;,&quot;/home/g8489/Android/sdk&quot;)</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>file = File(project.basePath + &quot;/.config/${artifact.fileName}&quot;)</expression-string>
         <language-id>kotlin</language-id>
@@ -518,26 +538,9 @@
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>item.details().downloadArtifact()</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>item.details().parameters</expression-string>
-        <language-id>kotlin</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/kotlin-runtime.jar!/kotlin/collections/EmptyIterator.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/kotlin-runtime.jar!/kotlin/collections/AbstractCollection.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -560,13 +563,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/entry/ReadConfigFile.kt" />
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/entry/MacAccountFile.kt" />
     <entry file="file://$PROJECT_DIR$/src/com/main/entry/WindowsAccountFile.kt" />
     <entry file="file://$PROJECT_DIR$/src/com/main/utils/OsUtils.kt">
@@ -580,13 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -608,13 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="343" column="28" selection-start-line="343" selection-start-column="24" selection-end-line="343" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/utils/RunCmd.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -829,20 +811,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="33" column="9" selection-start-line="33" selection-end-line="33" selection-end-column="45" />
-          <folding>
-            <element signature="e#24#714#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="242">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/RunCmd.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="93" column="9" lean-forward="true" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+        <state relative-caret-position="144">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JOptionPane.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="52" column="41" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding>
+            <element signature="e#24#714#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

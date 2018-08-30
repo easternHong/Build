@@ -1,15 +1,14 @@
 package com.main
 
-import com.main.panel.Main
+import com.main.entry.BuildConfigFile
 import com.main.utils.Log
-import com.offbytwo.jenkins.JenkinsServer
+import com.main.utils.RunCmd
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.Okio
 import java.io.File
 import java.io.IOException
-import java.net.URI
 
 
 object MainTest {
@@ -88,6 +87,13 @@ object MainTest {
             sink.flush()
             sink.close()
             Log.i("download success")
+            val adbProperties = BuildConfigFile("/home/g8489/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint/local.properties")
+            val adbPath = adbProperties.getProperty("sdk.dir") + "/platform-tools/adb"
+            println(adbPath)
+            val cmd = listOf(adbPath, "push", "/home/g8489/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint/.idea/libcom_yy_mobile_plugin_homepage.so",
+                    "/sdcard/yyplugins/libcom_yy_mobile_plugin_homepage.so").toMutableList()
+            val retList = RunCmd.executeShell(cmd)
+            println(retList)
         } catch (e: IOException) {
             Log.i("download err:$e")
 //            Main.showDownloadBtn(true)
