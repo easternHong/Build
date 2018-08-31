@@ -3,22 +3,18 @@ package com.main.panel
 import com.main.entry.BuildConfigFile
 import com.main.entry.IConfigFile
 import com.main.script.Script
+import com.main.task.TaskManager
 import com.main.utils.*
-import com.main.utils.log.LogTextAreaOutputStream
-import com.main.utils.log.TextAreaOutputStream
 import com.offbytwo.jenkins.JenkinsServer
 import com.offbytwo.jenkins.model.Artifact
 import com.offbytwo.jenkins.model.BuildResult
-import main.utils.task.TaskManager
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.Okio
 import java.awt.BorderLayout
 import java.awt.Dimension
-import java.awt.EventQueue
 import java.awt.event.ComponentEvent
 import java.io.File
-import java.io.PrintStream
 import java.net.URI
 import javax.swing.*
 
@@ -58,11 +54,10 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        System.setOut(PrintStream((TextAreaOutputStream(logArea, ""))))
         Log.instance.init(logArea, scrollPane)
         mProjectBasePath = "Build"
         mProjectName = System.getProperty("user.dir")
-        if (!OsUtils.isWindows()) {
+        if (OsUtils.isWindows()) {
             val path = this.javaClass.classLoader.getResource(SVN_FILE).file
             Utils.unZipIt(path, "./.idea/svn")
             Log.i("unzip svn client for windows:$path")
@@ -72,21 +67,27 @@ object Main {
             OsUtils.isWindows() -> BuildConfigFile(file.absolutePath)
             else -> BuildConfigFile(file.absolutePath)
         }
-        init()
-        showDownloadBtn(true)
+        initView()
+        //不在编译
+        if (buildState == BUILD_STATE_IDLE) {
+            work()
+        }
+
     }
 
     fun startApplication(file: File, project: com.intellij.openapi.project.Project) {
         mProjectBasePath = project.basePath!!
         mProjectName = project.name
         Log.instance.init(logArea, scrollPane)
-        System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
-        System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
         configFile = when {
             OsUtils.isWindows() -> BuildConfigFile(file.absolutePath)
             else -> BuildConfigFile(file.absolutePath)
         }
-        init()
+        initView()
+        //不在编译
+        if (buildState == BUILD_STATE_IDLE) {
+            work()
+        }
     }
 
 
@@ -102,7 +103,7 @@ object Main {
 
     private var jDownLoadBtn: JButton? = null
 
-    private fun init() {
+    private fun initView() {
         jFrame = JFrame(mProjectName + "插件本地服务器构建辅助工具")
         jFrame.addComponentListener(object : SimpleComponentListener() {
             override fun componentResized(e: ComponentEvent?) {
@@ -111,7 +112,7 @@ object Main {
                     val frameWidth = jFrame.width
                     jPanel.setBounds(0, 0, jFrame.width, jFrame.height)
                     val y = jSubmitBtn.bounds.y + jSubmitBtn.bounds.height + 10
-                    scrollPane.setBounds(0, y, frameWidth, jFrame.height - y)
+                    scrollPane.setBounds(0, y, frameWidth, jFrame.height - y - 5)
                 } catch (e: Exception) {
                 }
             }
@@ -132,9 +133,6 @@ object Main {
 
         jFrame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         jFrame.setLocation(100, 70)
-        EventQueue.invokeLater({
-            //jSubmitBtn.isEnabled = !work()
-        })
         jFrame.isVisible = true
         if (buildNumber == -1) {
             Log.i("Welcome!!!")
@@ -176,21 +174,15 @@ object Main {
         val y = jSubmitBtn.bounds.y + jSubmitBtn.bounds.height + 10
         scrollPane.setBounds(0, y, WINDOW_WIDTH, WINDOW_HEIGHT - y)
         jPanel.add(scrollPane)
-        //不在编译
-        if (buildState == BUILD_STATE_IDLE) {
-            work()
-        }
+
     }
 
 
     private fun work(): Boolean {
-        configFile.putProperty("workspace", mProjectBasePath)
-        //备份配置文件。
         TaskManager.execute(Runnable {
             Log.i("**************************************")
-            //jSubmitBtn.isEnabled = true
-            //创建脚本
             if (!OsUtils.isWindows()) {
+                //创建脚本
                 createShellFile()
                 Runtime.getRuntime().exec("chmod u+x $mProjectBasePath/.idea/.shell")
                 val list = listOf("$mProjectBasePath/.idea/.shell", mProjectBasePath).toMutableList()
@@ -201,6 +193,9 @@ object Main {
                         configFile.putProperty(item.substring(0, index), item.substring(index + 1))
                     }
                 }
+//                configFile.putProperty(REPO_URL, "https://svn.yy.com/repos/src/dwmobile/pluginhomepage/android/branches/pluginhomepage-android_7.10.0_maint")
+//                configFile.putProperty(REVISION, "2249873")
+//                configFile.putProperty(PATCH_FILE, "/Users/eastern/project/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint/diff.patch")
                 if (configFile.getProperty(REPO_URL).isNullOrEmpty()) {
                     Log.i("没有发现svn repo url")
                     return@Runnable
@@ -210,7 +205,7 @@ object Main {
                     Log.i("没有发现svn revision")
                     return@Runnable
                 }
-                //get revision
+                //get PATCH_FILE
                 if (configFile.getProperty(PATCH_FILE).isNullOrEmpty()) {
                     Log.i("没有发现 patch_file")
 //                    return@Runnable
@@ -252,10 +247,16 @@ object Main {
     }
 
     private fun createShellFile() {
-        val scripFile = File(mProjectBasePath + "/.idea/.shell")
+        val scripFile = File("$mProjectBasePath/.idea/.shell")
         //创建文件
         if (!scripFile.exists()) {
-            scripFile.createNewFile()
+            try {
+                val ret = scripFile.createNewFile()
+                Log.i("create file $ret")
+            } catch (e: Exception) {
+                Log.i("ex:$e")
+            }
+
         }
         val script = Script.getScript()
         scripFile.bufferedWriter().use { out ->
@@ -264,7 +265,7 @@ object Main {
         }
         if (OsUtils.isWindows()) {
             val path = this.javaClass.classLoader.getResource(SVN_FILE).file
-            Utils.unZipIt(path, mProjectBasePath + "/.idea/svn")
+            Utils.unZipIt(path, "$mProjectBasePath/.idea/svn")
             Log.i("unzip svn client for windows:$path")
         }
         Log.i("create shell file:" + scripFile.exists())
@@ -276,18 +277,18 @@ object Main {
         val revision = configFile.getProperty(REVISION)
         Log.i("revision:$revision")
         if (revision.isNullOrEmpty() or !isNumeric(revision)) {
-            Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
-            goAhead = false
+            Log.i("$mProjectBasePath: is not a valid svn repo")
+//            goAhead = false
         }
         //svn_url
         val repoUrl = configFile.getProperty(REPO_URL)
         Log.i("repo_url:$repoUrl")
         if (repoUrl.isNullOrEmpty()) {
-            Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
+            Log.i("$mProjectBasePath: is not a valid svn repo")
             goAhead = false
         }
         //patch_file
-        val patchFile = configFile.getProperty("patch_file")
+        val patchFile = configFile.getProperty(PATCH_FILE)
         Log.i("patch_file:$patchFile")
         if (!(patchFile != null && File(patchFile).exists())) {
             Log.i("$mProjectBasePath: can't find patch file")
@@ -339,12 +340,18 @@ object Main {
         //trigger a build
         buildNumber = jenkins.getJob(jobName).nextBuildNumber
         Log.i("buildNumber.number:$buildNumber")
-        jenkins.getJob(jobName).build(pMap, fMap)
-        Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
-        buildState = BUILD_STATE_STARTED
-        checkBuildStatus()
-        buildState = BUILD_STATE_BUILDING
-        //jSubmitBtn.isEnabled = false
+        Log.i("pMap:$pMap")
+        Log.i("fMap:$fMap")
+
+        TaskManager.execute(Runnable {
+            ///////////
+            jenkins.getJob(jobName).build(pMap, fMap)
+            ///////////
+            Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
+            buildState = BUILD_STATE_STARTED
+            checkBuildStatus()
+            buildState = BUILD_STATE_BUILDING
+        })
     }
 
     private fun checkBuildStatus() {
@@ -352,10 +359,10 @@ object Main {
     }
 
 
-    private
-    val runnable = Runnable {
+    private val runnable = Runnable {
         val list = jenkins.getJob(jobName).allBuilds
         var goAgain = true
+        Log.i("all Builds ${list?.size}")
         for (item in list) {
             if (item.number == buildNumber) {
                 val ret = if (item.details().result == null) BuildResult.BUILDING else item.details().result

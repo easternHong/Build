@@ -1,4 +1,4 @@
-package main.utils.task
+package com.main.task
 
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit

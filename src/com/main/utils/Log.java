@@ -18,6 +18,7 @@ public class Log {
     public static void i(String message) {
         consoleThread.append(">>>" + message);
         consoleThread.append("\n");
+        System.out.println(message);
     }
 
 }
