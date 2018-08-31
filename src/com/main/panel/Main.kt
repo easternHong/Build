@@ -31,23 +31,41 @@ object Main {
     private var logArea = JTextArea()
     private lateinit var project: com.intellij.openapi.project.Project
     private val okHttpClient = OkHttpClient()
+
+
+    private var buildNumber = -1
+    private var jobName = ""
+    private var branch = ""
+    private lateinit var jenkins: JenkinsServer
+    private const val SVN_FILE = "svn/Subversion-1.10.2.zip"
+    private const val BUILD_STATE_IDLE = 0
+    private const val BUILD_STATE_STARTED = 1
+    private const val BUILD_STATE_BUILDING = 2
+    private const val BUILD_STATE_FAILED = 3
+    private const val BUILD_STATE_BUILD_SUCCESS = 4
+    private const val BUILD_STATE_DOWNLOAD_SUCCESS = 5
+    private const val BUILD_STATE_PUSH_FAILED = 6
+    private var buildState = BUILD_STATE_IDLE
+
+
+    private const val REPO_URL = "repo_url"
+    private const val REVISION = "revision"
+
+
     @JvmStatic
     fun main(args: Array<String>) {
         System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
         System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
-        EventQueue.invokeLater({ init() })
+        if (!OsUtils.isWindows()) {
+            val path = this.javaClass.classLoader.getResource(SVN_FILE).file
+            Utils.unZipIt(path, "./.idea/svn")
+            Log.i("unzip svn client for windows:$path")
+        }
     }
 
     fun startApplication(file: File, project: com.intellij.openapi.project.Project) {
         System.setOut(PrintStream(TextAreaOutputStream(logArea, "")))
         System.setErr(PrintStream(LogTextAreaOutputStream(logArea, "")))
-        accountFile = when {
-            OsUtils.isWindows() -> {
-                BuildConfigFile(System.getProperty("user.home") + "/.build_config")
-            }
-            else -> BuildConfigFile(System.getProperty("user.home") + "/.build_config")
-        }
-
         configFile = when {
             OsUtils.isWindows() -> BuildConfigFile(file.absolutePath)
             else -> BuildConfigFile(file.absolutePath)
@@ -64,7 +82,6 @@ object Main {
     private lateinit var jPanel: JPanel
     private lateinit var scrollPane: JScrollPane
 
-    private lateinit var accountFile: IConfigFile
     private lateinit var configFile: IConfigFile
 
     private var jDownLoadBtn: JButton? = null
@@ -130,25 +147,6 @@ object Main {
 
 
     private fun work(): Boolean {
-        //check account
-        var isAccountValid = true
-        val account = accountFile.getProperty("account")
-        if (account == null || account.isEmpty()) {
-            isAccountValid = false
-            Log.i("account is empty")
-        }
-
-        val pwd = accountFile.getProperty("pwd")
-        if (pwd == null || pwd.isEmpty()) {
-            isAccountValid = false
-            Log.i("pwd is empty")
-        }
-//        不用
-//        if (!isAccountValid) {
-//            showAccountPanel()
-//            return false
-//        }
-
         configFile.putProperty("workspace", project.basePath!!)
         //备份配置文件。
         TaskManager.execute(Runnable {
@@ -159,14 +157,28 @@ object Main {
                 jSubmitBtn.isEnabled = true
                 //创建脚本
                 val list = if (OsUtils.isWindows())
-                    listOf("cmd.exe", "/c", project.basePath!! + "/.idea/.shell",
+                    listOf("cmd.exe", "/c", project.basePath!! + "/.idea/svn/bin/svn diff >>diff.patch",
                             project.basePath!!).toMutableList()
                 else listOf(project.basePath!! + "/.idea/.shell",
                         project.basePath!!).toMutableList()
-                if (!OsUtils.isWindows()) {
+                val retList = if (!OsUtils.isWindows()) {
                     Runtime.getRuntime().exec("chmod u+x " + project.basePath!! + "/.idea/.shell")
+                    RunCmd.executeShell(list)
+                } else {
+                    //get patch_file
+                    RunCmd.executeShell(listOf("cmd.exe", "/c", project.basePath!! + "/.idea/svn/bin/svn diff >>diff.patch",
+                            project.basePath!!).toMutableList())
+                    configFile.putProperty("patch_file", project.basePath!! + "/diff.patch")
+                    //get repo_url
+                    var ret = RunCmd.executeShell(listOf("cmd.exe", "/c", project.basePath!! + "/.idea/svn/bin/svn info --show-item=url",
+                            project.basePath!!).toMutableList())
+                    configFile.putProperty(REPO_URL, ret[0])
+                    //get revision
+                    ret = RunCmd.executeShell(listOf("cmd.exe", "/c", project.basePath!! + "/.idea/svn/bin/svn info --show-item=revision",
+                            project.basePath!!).toMutableList())
+                    configFile.putProperty(REVISION, ret[0])
+                    ArrayList()
                 }
-                val retList = RunCmd.executeShell(list)
                 for (item in retList) {
                     if (item.isEmpty() or !item.contains(":")) continue
                     val key = item.split(":")[0]
@@ -202,74 +214,25 @@ object Main {
             out.write(script)
             out.close()
         }
-        Log.i("create shell file:" + scripFile.exists())
-    }
-
-    private fun showAccountPanel() {
-        val frame = JFrame("填写账号&密码")
-        frame.isResizable = false
-        frame.minimumSize = Dimension(200 + BTN_WIDTH, 160)
-        val jPanel = JPanel()
-        jPanel.layout = null
-
-        val c = frame.contentPane
-        c.add(jPanel, BorderLayout.CENTER)
-        frame.layout = null
-        c.add(jPanel)
-        frame.setBounds(0, 0, 200 + BTN_WIDTH, 120)
-        jPanel.setBounds(0, 0, frame.width, frame.height)
-        frame.isVisible = true
-        frame.setLocation(jFrame.x + (jFrame.width - frame.width) / 2,
-                jFrame.y + 30)
-
-
-        val lAccount = JLabel("账号：")
-        lAccount.setBounds(10, 10, getLabelWidth(lAccount), 30)
-        jPanel.add(lAccount)
-        val etAccount = JTextArea("")
-        val x = lAccount.x + lAccount.width + 10
-        etAccount.setBounds(x, 10, jPanel.width - x - 10, 30)
-        jPanel.add(etAccount)
-
-        val lPwd = JLabel("密码：")
-        lPwd.setBounds(10, 50, getLabelWidth(lPwd), 30)
-        jPanel.add(lPwd)
-        val etPwd = JTextArea("")
-        etPwd.setBounds(lPwd.x + lPwd.width + 10, 50, jPanel.width - x - 10, 30)
-        jPanel.add(etPwd)
-
-        val btn = JButton("确定")
-        btn.setBounds((200 + BTN_WIDTH - 80) / 2, lPwd.y + lPwd.height + 30, BTN_WIDTH, 30)
-        jPanel.add(btn)
-        btn.addActionListener {
-            if (etAccount.text == null || etAccount.text.trim().isEmpty()) {
-                showAlert("账号不能为空")
-                return@addActionListener
-            }
-
-            if (etPwd.text == null || etPwd.text.trim().isEmpty()) {
-                showAlert("密码不能为空")
-                return@addActionListener
-            }
-            //保存账号配置文件
-            accountFile.putProperty("account", etAccount.text.trim())
-            accountFile.putProperty("pwd", etPwd.text.trim())
-            frame.dispose()
+        if (OsUtils.isWindows()) {
+            val path = this.javaClass.classLoader.getResource(SVN_FILE).file
+            Utils.unZipIt(path, project.basePath!! + "/.idea/svn")
+            Log.i("unzip svn client for windows:$path")
         }
-
+        Log.i("create shell file:" + scripFile.exists())
     }
 
     private fun checkParameters(): Boolean {
         var goAhead = true
         //revision
-        val revision = configFile.getProperty("revision")
+        val revision = configFile.getProperty(REVISION)
         Log.i("revision:$revision")
         if (revision.isNullOrEmpty() or !isNumeric(revision)) {
             Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
             goAhead = false
         }
         //svn_url
-        val repoUrl = configFile.getProperty("repo_url")
+        val repoUrl = configFile.getProperty(REPO_URL)
         Log.i("repo_url:$repoUrl")
         if (repoUrl.isNullOrEmpty()) {
             Log.i(configFile.getProperty("workspace") + ": is not a valid svn repo")
@@ -282,8 +245,6 @@ object Main {
             Log.i(project.basePath + ": can't find patch file")
             goAhead = false
         }
-        Log.i("account:" + accountFile.getProperty("account"))
-        Log.i("pwd:" + accountFile.getProperty("pwd"))
         return goAhead
     }
 
@@ -303,33 +264,19 @@ object Main {
 
     }
 
-    private fun showAlert(text: String) {
-        // 消息对话框无返回, 仅做通知作用
-        JOptionPane.showMessageDialog(
-                jFrame,
-                text,
-                "",
-                JOptionPane.WARNING_MESSAGE
-        )
-    }
-
     private fun getJobNameFromUrl(): String {
-        val url = configFile.getProperty("repo_url")
+        val url = configFile.getProperty(REPO_URL)
         val index = url?.lastIndexOf("/")!!
         val ret = url.substring(index.plus(1))
         return ret.substring(0, ret.indexOf("-"))
     }
 
     private fun getBranchNameFromUrl(): String {
-        val repoUrl = configFile.getProperty("repo_url") ?: return ""
+        val repoUrl = configFile.getProperty(REPO_URL) ?: return ""
         return repoUrl.substring(repoUrl.lastIndexOf("-") + 1)
                 .replace("android_", "")
     }
 
-    private var buildNumber = -1
-    private var jobName = ""
-    private var branch = ""
-    private lateinit var jenkins: JenkinsServer
 
     private fun makeMission() {
         jenkins = JenkinsServer(URI("http://172.26.71.18:8087/"),
@@ -341,10 +288,7 @@ object Main {
         val pMap = HashMap<String, String>()
         val fMap = HashMap<String, File>()
         pMap["branch"] = branch
-        pMap["svn_account"] = accountFile.getProperty("account")!!
-        pMap["svn_pwd"] = accountFile.getProperty("pwd")!!
-
-        pMap["revision"] = configFile.getProperty("revision")!!
+        pMap[REVISION] = configFile.getProperty(REVISION)!!
         fMap["patch_file"] = File(configFile.getProperty("patch_file"))
         configFile.putProperty("branch", branch)
         //trigger a build
@@ -411,16 +355,14 @@ object Main {
         finalArtifact = artifact
         val file = File(project.basePath + "/.idea/${artifact.fileName}")
         if (buildState == BUILD_STATE_PUSH_FAILED && file.exists()) {
-            iGet?.success()
+            iGet.success()
             return
         }
         //http://172.26.71.18:8000/out/
         val uri = "http://172.26.71.18:8087/job/$jobName/lastSuccessfulBuild/artifact/${artifact.relativePath}"
         //1.下载文件
-        val DOWNLOAD_CHUNK_SIZE = 2048 //Same as Okio Segment.SIZE
-
         try {
-            iGet?.start()
+            iGet.start()
             val request = Request.Builder().url(uri).build()
             val response = okHttpClient.newCall(request).execute()
             val body = response.body()
@@ -435,28 +377,20 @@ object Main {
 
             var totalRead: Long = 0
             var read: Long = 0
-            while ({ read = source.read(sink.buffer(), DOWNLOAD_CHUNK_SIZE.toLong());read }() != -1L) {
+            while ({ read = source.read(sink.buffer(), 2048);read }() != -1L) {
                 totalRead += read
                 val progress = (totalRead * 100 / contentLength).toInt()
-                iGet?.progress(progress)
+                iGet.progress(progress)
             }
             sink.writeAll(source)
             sink.flush()
             sink.close()
-            iGet?.success()
+            iGet.success()
         } catch (e: Throwable) {
-            iGet?.failed(e)
+            iGet.failed(e)
         }
     }
 
-    private const val BUILD_STATE_IDLE = 0
-    private const val BUILD_STATE_STARTED = 1
-    private const val BUILD_STATE_BUILDING = 2
-    private const val BUILD_STATE_FAILED = 3
-    private const val BUILD_STATE_BUILD_SUCCESS = 4
-    private const val BUILD_STATE_DOWNLOAD_SUCCESS = 5
-    private const val BUILD_STATE_PUSH_FAILED = 6
-    private var buildState = BUILD_STATE_IDLE
 
     interface IGetArtifact {
         fun start()
