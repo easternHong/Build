@@ -161,8 +161,10 @@ object Main {
         val y = jSubmitBtn.bounds.y + jSubmitBtn.bounds.height + 10
         scrollPane.setBounds(0, y, WINDOW_WIDTH, WINDOW_HEIGHT - y)
         jPanel.add(scrollPane)
-
-
+        //不在编译
+        if (buildState == BUILD_STATE_IDLE) {
+            work()
+        }
     }
 
 
@@ -453,6 +455,7 @@ object Main {
                 // 消息对话框无返回, 仅做通知作用
                 val input = JOptionPane.showOptionDialog(jFrame, "so已经更新到手机",
                         "编译完成", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
+                buildState = BUILD_STATE_IDLE
                 if (input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION) {
                     // do something
                 }

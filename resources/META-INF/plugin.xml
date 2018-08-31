@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.yy.main</id>
-    <name>remote-build</name>
+    <name>YY Build</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
@@ -33,7 +33,7 @@
     <actions>
         <!-- Add your actions here -->
         <action id="TestPlugin" class="com.main.entry.EntryPlugin"
-                text="Build Remote" description="Build in local server"
+                text="YY Build" description="Build in local server"
                 popup="true"
         >
             <add-to-group group-id="BuildMenu" anchor="last"/>
