@@ -136,7 +136,9 @@ object Main {
             //jSubmitBtn.isEnabled = !work()
         })
         jFrame.isVisible = true
-        Log.i("Welcome!!!")
+        if (buildNumber == -1) {
+            Log.i("Welcome!!!")
+        }
     }
 
     private fun addWidgets() {
@@ -145,7 +147,20 @@ object Main {
         jPanel.add(jSubmitBtn)
         jSubmitBtn.addActionListener {
             if (buildState == BUILD_STATE_BUILDING) {
-
+                val input = JOptionPane.showOptionDialog(jFrame, "重新编译？",
+                        "还没完成，重新开始？", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
+                TaskManager.execute(Runnable {
+                    if (input == JOptionPane.OK_OPTION) {
+                        buildState = BUILD_STATE_IDLE
+                        // do something
+                        //先要取消前面的编译
+                        Log.i("停止前一个编译:$buildNumber")
+                        val ret = jenkins.getJob(jobName)?.getBuildByNumber(buildNumber)?.Stop()
+                        Log.i("$ret")
+                        work()
+                    }
+                })
+                return@addActionListener
             }
             work()
         }
@@ -454,7 +469,7 @@ object Main {
             if (retList.size > 0 && retList[0].contains("[100%]")) {
                 // 消息对话框无返回, 仅做通知作用
                 val input = JOptionPane.showOptionDialog(jFrame, "so已经更新到手机",
-                        "编译完成", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
+                        "编译完成", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
                 buildState = BUILD_STATE_IDLE
                 if (input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION) {
                     // do something
