@@ -3,7 +3,6 @@ package com.main.entry
 import com.main.utils.Log
 import java.io.File
 import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.util.*
 
 open class BuildConfigFile(var path: String) : IConfigFile {
@@ -15,7 +14,7 @@ open class BuildConfigFile(var path: String) : IConfigFile {
     override fun putProperty(key: String, value: String) {
         try {
             property[key] = value
-            property.store(FileOutputStream(path), "")
+//            property.store(FileOutputStream(path), "")
         } catch (e: Exception) {
             Log.i("e:$e")
         }

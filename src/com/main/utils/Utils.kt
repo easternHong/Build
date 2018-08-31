@@ -53,7 +53,7 @@ object Utils {
             while (ze != null) {
                 val fileName = ze.name
                 val newFile = File(outputFolder + File.separator + fileName)
-                System.out.println("""file unzip : ${newFile.absoluteFile}""")
+                Log.i("""file unzip : ${newFile.absoluteFile}""")
                 //create all non exists folders
                 //else you will hit FileNotFoundException for compressed folder
                 File(newFile.parent).mkdirs()

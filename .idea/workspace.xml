@@ -7,9 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f3cb92-20fc-49cf-a2be-342f3b1b4352" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/svn/Subversion-1.10.2.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/main/utils/log/ConsoleThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/MainTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/MainTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/panel/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/panel/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/utils/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/utils/Log.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/utils/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/utils/Utils.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,33 +25,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="MainTest.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="170" column="106" selection-start-line="170" selection-start-column="106" selection-end-line="170" selection-end-column="106" />
+            <state relative-caret-position="310">
+              <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
               <folding>
-                <element signature="e#24#687#0" expanded="true" />
+                <element signature="e#24#657#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Script.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/main/script/Script.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -65,22 +50,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>revision</find>
-      <find>getBranchNameFromUrl</find>
-      <find>next</find>
-      <find>please check</find>
-      <find>okHttpClient</find>
-      <find>jSubmitBtn</find>
-      <find>20</find>
-      <find>getArtifacts</find>
-      <find>chm</find>
-      <find>finalArtifact =</find>
-      <find>action</find>
-      <find>des</find>
-      <find>destfile</find>
-      <find>exit</find>
-      <find>job</find>
-      <find>can't find patch file</find>
       <find>push</find>
       <find>go</find>
       <find>DISPOSE_ON_CLOSE</find>
@@ -91,14 +60,34 @@
       <find>拉</find>
       <find>jDownLoadBtn</find>
       <find>while</find>
-      <find>create</find>
       <find>crea</find>
       <find>Subversion</find>
       <find>createShellFile</find>
+      <find>patch</find>
+      <find>repo_url</find>
+      <find>&quot;repo_url&quot;</find>
+      <find>&quot;revision&quot;</find>
+      <find>create</find>
+      <find>project</find>
+      <find>project.basePath!!</find>
+      <find>project.name</find>
+      <find>project.basePath</find>
+      <find>project.</find>
+      <find>logArea</find>
+      <find />
+      <find />
+      <find>[100</find>
+      <find>showDownloadBtn</find>
+      <find>work</find>
+      <find>configFile</find>
     </findStrings>
     <replaceStrings>
       <replace>\&quot;</replace>
       <replace>30</replace>
+      <replace>REPO_URL</replace>
+      <replace>REVISION</replace>
+      <replace>mProjectName</replace>
+      <replace>mProjectBasePath</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -111,10 +100,7 @@
         <option value="$PROJECT_DIR$/src/com/main/icon/Icon.java" />
         <option value="$PROJECT_DIR$/src/com/main/icon/BuildIcon.java" />
         <option value="$PROJECT_DIR$/src/com/main/TestPlugin.java" />
-        <option value="$PROJECT_DIR$/src/com/main/utils/Log.java" />
-        <option value="$PROJECT_DIR$/src/com/main/utils/log/TextAreaOutputStream.java" />
         <option value="$PROJECT_DIR$/src/com/main/utils/SimpleComponentListener.kt" />
-        <option value="$PROJECT_DIR$/src/com/main/utils/RunCmd.kt" />
         <option value="$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt" />
         <option value="$PROJECT_DIR$/.idea/.config" />
         <option value="$PROJECT_DIR$/src/com/main/entry/ReadConfigFile.kt" />
@@ -122,18 +108,22 @@
         <option value="$PROJECT_DIR$/src/com/main/entry/MacAccountFile.kt" />
         <option value="$PROJECT_DIR$/src/com/main/entry/WindowsAccountFile.kt" />
         <option value="$PROJECT_DIR$/src/com/main/entry/AccountConfigFile.kt" />
-        <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt" />
         <option value="$PROJECT_DIR$/src/com/main/utils/OsUtils.kt" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfig.kt" />
         <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfig.java" />
         <option value="$PROJECT_DIR$/Build.iml" />
         <option value="$PROJECT_DIR$/src/com/main/task/TaskManager.kt" />
-        <option value="$PROJECT_DIR$/src/com/main/MainTest.kt" />
         <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/com/main/script/Script.kt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/main/utils/Utils.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/utils/log/TextAreaOutputStream.java" />
+        <option value="$PROJECT_DIR$/src/com/main/utils/log/ConsoleThread.java" />
+        <option value="$PROJECT_DIR$/src/com/main/utils/Log.java" />
+        <option value="$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/utils/RunCmd.kt" />
+        <option value="$PROJECT_DIR$/src/com/main/MainTest.kt" />
         <option value="$PROJECT_DIR$/src/com/main/panel/Main.kt" />
       </list>
     </option>
@@ -164,10 +154,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="57" />
-    <option name="y" value="249" />
-    <option name="width" value="1845" />
-    <option name="height" value="1016" />
+    <option name="x" value="76" />
+    <option name="y" value="160" />
+    <option name="width" value="1849" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -197,9 +187,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,11 +198,6 @@
             <path>
               <item name="Build" type="b2602c69:ProjectViewProjectNode" />
               <item name="Build" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Build" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -222,18 +205,13 @@
               <item name="Build" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Build" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -280,7 +258,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.com.main.panel.Main">
+  <component name="RunManager" selected="Plugin.Plugin">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -375,8 +353,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.com.main.panel.Main" />
         <item itemvalue="Kotlin.com.main.MainTest" />
+        <item itemvalue="Kotlin.com.main.panel.Main" />
         <item itemvalue="Kotlin.com.main.utils.OsUtils" />
       </list>
     </recent_temporary>
@@ -401,8 +379,7 @@
     <option name="totallyTimeSpent" value="6714000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -412,38 +389,38 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.32963988" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3173913" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.59130436" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24782608" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32934782" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.5902174" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.16177285" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18836565" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4673913" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5619565" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="ASM" order="6" />
-      <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3173913" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24782608" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16177285" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18836565" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -452,13 +429,13 @@
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="ASM" order="6" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4673913" />
-      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32391304" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.59130436" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5902174" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32934782" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32934782" />
@@ -469,167 +446,74 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/com/main/MainTest.kt</url>
-          <line>95</line>
-          <properties />
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="104" />
+      <option name="time" value="174" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>File(file).exists()</expression-string>
+        <expression-string>configFile</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>File(file)</expression-string>
+        <expression-string>mProjectBasePath</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>file</expression-string>
+        <expression-string>RunCmd.executeShell(&quot;svn diff $mProjectBasePath &gt;&gt; diff.patch&quot;)</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>adbProperties.putProperty(&quot;sdk.dir&quot;,&quot;/home/g8489/Android/sdk&quot;)</expression-string>
+        <expression-string>BufferedReader(InputStreamReader(process.inputStream)).readLine()</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>file = File(project.basePath + &quot;/.config/${artifact.fileName}&quot;)</expression-string>
+        <expression-string>reader.readLine()</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>File(project.basePath + &quot;/.config/${artifact.fileName}&quot;).exists()</expression-string>
+        <expression-string>RunCmd.executeShell(listOf(&quot;ping -c 3&quot;).toMutableList())</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>File(project.basePath + &quot;/.config/${artifact.fileName}&quot;)</expression-string>
+        <expression-string>RunCmd.executeShell(listOf(&quot;ping -c 3 &quot;).toMutableList())</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>item.details().artifacts</expression-string>
+        <expression-string>args[0]</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>item.details()</expression-string>
+        <expression-string>args.removeAt(1)</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/ReadConfigFile.kt" />
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/MacAccountFile.kt" />
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/WindowsAccountFile.kt" />
-    <entry file="file://$PROJECT_DIR$/src/com/main/utils/OsUtils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/com/intellij/platform/templates/ArchivedTemplatesFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/IConfigFile.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="4" lean-forward="true" selection-start-column="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/okhttp-3.3.1-sources.jar!/okhttp3/OkHttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="343" column="28" selection-start-line="343" selection-start-column="24" selection-end-line="343" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfig.kt" />
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfig.java" />
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-sources.jar!/com/offbytwo/jenkins/JenkinsServer.java" />
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar!/com/offbytwo/jenkins/client/util/UrlUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="52" column="53" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar!/com/offbytwo/jenkins/model/BaseModel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar!/com/offbytwo/jenkins/client/JenkinsHttpConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar!/com/offbytwo/jenkins/client/JenkinsHttpClient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="98" column="35" lean-forward="true" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/httpclient-4.5.2.jar!/org/apache/http/client/methods/HttpGet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar!/com/offbytwo/jenkins/JenkinsServer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="177" column="64" selection-start-line="177" selection-start-column="64" selection-end-line="177" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1914" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/httpclient-4.5.2.jar!/org/apache/http/client/methods/HttpPost.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8.jar!/com/offbytwo/jenkins/model/BaseModel.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -763,20 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/utils/RunCmd.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/javax/swing/JOptionPane.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -813,44 +683,195 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt">
+    <entry file="file://$PROJECT_DIR$/src/com/main/script/Script.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="759">
+          <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/utils/Utils.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="924">
+          <caret line="51" column="45" lean-forward="true" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
           <folding>
             <element signature="e#24#389#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-api.jar!/com/intellij/openapi/components/ComponentManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-api.jar!/com/intellij/openapi/project/Project.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="15" column="43" lean-forward="true" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="14" column="65" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/Runnable.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/awt/Font.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="141" column="27" selection-start-line="141" selection-start-column="23" selection-end-line="141" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/FilterOutputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/log/LogTextAreaOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/OutputStreamWriter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/PrintStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/OutputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/sun/nio/cs/StreamEncoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/log/TextAreaOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/log/ConsoleThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/Log.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/sun/misc/Unsafe.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="353" column="23" selection-start-line="353" selection-start-column="23" selection-end-line="353" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/entry/IConfigFile.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/Runtime.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="84" column="19" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diff.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-594" />
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/ProcessBuilder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/utils/RunCmd.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding>
+            <element signature="e#24#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/main/MainTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="170" column="106" selection-start-line="170" selection-start-column="106" selection-end-line="170" selection-end-column="106" />
+        <state relative-caret-position="310">
+          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
           <folding>
-            <element signature="e#24#687#0" expanded="true" />
+            <element signature="e#24#657#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/main/script/Script.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="30" />
         </state>
       </provider>
     </entry>

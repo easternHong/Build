@@ -16,6 +16,9 @@ object MainTest {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val ret = RunCmd.executeShell(listOf("svn", "diff", "/home/g8489/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint",
+                ">>", "diff.patch").toMutableList())
+        println(ret)
 //        System.out.println("Working Directory = " +
 //                System.getProperty("user.dir"))
 //        val file = File("C:\\Users\\eastern\\Downloads\\build_remote.bat")
