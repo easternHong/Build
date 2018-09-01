@@ -54,6 +54,19 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val jobStatus = 10
+        if (jobStatus > 0) {
+            //非空闲
+            val input = JOptionPane.showOptionDialog(null, "前面有${jobStatus}个任务\n继续排队？",
+                    "当前状态", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null)
+            buildState = BUILD_STATE_IDLE
+            if (input == JOptionPane.CANCEL_OPTION) {
+                // do something
+                println()
+                return
+            }
+        }
+
         Log.instance.init(logArea, scrollPane)
         mProjectBasePath = "Build"
         mProjectName = System.getProperty("user.dir")
@@ -177,6 +190,21 @@ object Main {
 
     }
 
+    /**
+     * 检测当前job是否空闲
+     */
+    private fun checkJobIdle(): Int {
+        val list = jenkins.getJob(jobName).allBuilds
+        var isBuildingJob = 0
+        if (list != null) {
+            for (item in list) {
+                if (item.details().isBuilding) {
+                    isBuildingJob += 1
+                }
+            }
+        }
+        return isBuildingJob
+    }
 
     private fun work(): Boolean {
         TaskManager.execute(Runnable {
@@ -337,6 +365,18 @@ object Main {
         branch = getBranchNameFromUrl()
         jobName = getJobNameFromUrl()
 
+        val jobStatus = checkJobIdle()
+        if (jobStatus > 0) {
+            //非空闲
+            val input = JOptionPane.showOptionDialog(jFrame, "前面有${jobStatus}个任务\n继续排队？",
+                    "当前状态", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null)
+            buildState = BUILD_STATE_IDLE
+            if (input == JOptionPane.CANCEL_OPTION) {
+                // do something
+                Log.i("取消排队")
+                return
+            }
+        }
         val pMap = HashMap<String, String>()
         val fMap = HashMap<String, File>()
         pMap["branch"] = branch
@@ -482,7 +522,7 @@ object Main {
             if (retList.size > 0 && retList[0].contains("[100%]")) {
                 // 消息对话框无返回, 仅做通知作用
                 val input = JOptionPane.showOptionDialog(jFrame, "so已经更新到手机",
-                        "编译完成", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
+                        "编译完成", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null)
                 buildState = BUILD_STATE_IDLE
                 if (input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION) {
                     // do something
