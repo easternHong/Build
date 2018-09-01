@@ -1,9 +1,9 @@
 package com.main.utils
 
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.zip.ZipEntry
@@ -37,7 +37,7 @@ object Utils {
      * @param zipFile input zip file
      * @param output zip file output folder
      */
-    fun unZipIt(zipFile: String, outputFolder: String) {
+    fun unZipIt(zipFile: InputStream, outputFolder: String) {
 
         val buffer = ByteArray(1024)
         try {
@@ -47,7 +47,7 @@ object Utils {
                 folder.mkdir()
             }
             //get the zip file content
-            val zis = ZipInputStream(FileInputStream(zipFile))
+            val zis = ZipInputStream((zipFile))
             //get the zipped file list entry
             var ze: ZipEntry? = zis.nextEntry
             while (ze != null) {

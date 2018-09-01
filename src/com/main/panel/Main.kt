@@ -32,7 +32,7 @@ object Main {
     private var jobName = ""
     private var branch = ""
     private lateinit var jenkins: JenkinsServer
-    private const val SVN_FILE = "svn/Subversion-1.10.2.zip"
+    private const val SVN_FILE = "svn/subversion.zip"
     private const val BUILD_STATE_IDLE = 0
     private const val BUILD_STATE_STARTED = 1
     private const val BUILD_STATE_BUILDING = 2
@@ -58,9 +58,9 @@ object Main {
         mProjectBasePath = "Build"
         mProjectName = System.getProperty("user.dir")
         if (OsUtils.isWindows()) {
-            val path = this.javaClass.classLoader.getResource(SVN_FILE).file
-            Utils.unZipIt(path, "./.idea/svn")
-            Log.i("unzip svn client for windows:$path")
+            val stream = this.javaClass.classLoader.getResourceAsStream(SVN_FILE)
+            Utils.unZipIt(stream, "./.idea/svn")
+            Log.i("unzip svn client for windows:$stream")
         }
         val file = File(mProjectBasePath.plus("/.idea/.config"))
         configFile = when {
@@ -271,9 +271,8 @@ object Main {
             out.close()
         }
         if (OsUtils.isWindows()) {
-            val path = this.javaClass.classLoader.getResource(SVN_FILE).file
-            Utils.unZipIt(path, "$mProjectBasePath/.idea/svn")
-            Log.i("unzip svn client for windows:$path")
+            val stream = this.javaClass.classLoader.getResourceAsStream(SVN_FILE)
+            Utils.unZipIt(stream, "$mProjectBasePath/.idea/svn")
         }
         Log.i("create shell file:" + scripFile.exists())
     }
