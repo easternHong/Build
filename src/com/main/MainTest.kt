@@ -1,14 +1,17 @@
 package com.main
 
 import com.main.entry.BuildConfigFile
+import com.main.panel.Main
 import com.main.utils.Log
 import com.main.utils.RunCmd
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.Okio
+import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
+import java.io.InputStreamReader
 
 
 object MainTest {
@@ -16,8 +19,13 @@ object MainTest {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val ret = RunCmd.executeShell(listOf("svn", "diff", "/home/g8489/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint",
-                ">>", "diff.patch").toMutableList())
+//        val ret = RunCmd.executeShell(listOf("svn", "diff", "/home/g8489/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint",
+//                ">>", "diff.patch").toMutableList())
+//
+
+        println("333"+listOf("cmd.exe", "/c","start /b", "D:/yyCode/7.7.10_homepage_feature/pluginhomepage-android_7.7.10_homepage_feature/.shell.bat").toTypedArray())
+        var ret =Runtime.getRuntime().exec(listOf("cmd.exe", "/c","start /b", "D:/yyCode/7.7.10_homepage_feature/pluginhomepage-android_7.7.10_homepage_feature/.shell.bat").toTypedArray())
+                .waitFor()
         println(ret)
 //        System.out.println("Working Directory = " +
 //                System.getProperty("user.dir"))

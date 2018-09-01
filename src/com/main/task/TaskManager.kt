@@ -11,7 +11,8 @@ object TaskManager {
 
 
     fun execute(runnable: Runnable) {
-        executors.submit(runnable)
+//        executors.submit(runnable)
+        runnable.run()
     }
 
     fun executeDelay(runnable: Runnable, delay: Long) {

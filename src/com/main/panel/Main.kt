@@ -112,7 +112,7 @@ object Main {
                     val frameWidth = jFrame.width
                     jPanel.setBounds(0, 0, jFrame.width, jFrame.height)
                     val y = jSubmitBtn.bounds.y + jSubmitBtn.bounds.height + 10
-                    scrollPane.setBounds(0, y, frameWidth, jFrame.height - y - 5)
+                    scrollPane.setBounds(0, y, frameWidth, jFrame.height - y - 20)
                 } catch (e: Exception) {
                 }
             }
@@ -181,9 +181,9 @@ object Main {
     private fun work(): Boolean {
         TaskManager.execute(Runnable {
             Log.i("**************************************")
+            //创建脚本
+            createShellFile()
             if (!OsUtils.isWindows()) {
-                //创建脚本
-                createShellFile()
                 Runtime.getRuntime().exec("chmod u+x $mProjectBasePath/.idea/.shell")
                 val list = listOf("$mProjectBasePath/.idea/.shell", mProjectBasePath).toMutableList()
                 val retList = RunCmd.executeShell(list)
@@ -212,11 +212,17 @@ object Main {
                 }
             } else {
                 //get patch_file
-                RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn diff >>diff.patch",
-                        mProjectBasePath).toMutableList())
+                var ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/.shell.bat").toMutableList())
+                Log.i("ret:$ret")
+                val pb = ProcessBuilder("cmd", "/c", "$mProjectBasePath/.idea/.shell.bat")
+                val dir = File(mProjectBasePath)
+                pb.directory(dir)
+                val p = pb.start()
+
+
                 configFile.putProperty("patch_file", "$mProjectBasePath/diff.patch")
                 //get repo_url
-                var ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn info --show-item=url",
+                ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn info --show-item=url",
                         mProjectBasePath).toMutableList())
                 if (ret.size == 0) {
                     Log.i("没有发现svn repo url")
@@ -247,7 +253,8 @@ object Main {
     }
 
     private fun createShellFile() {
-        val scripFile = File("$mProjectBasePath/.idea/.shell")
+        val suffix = if (OsUtils.isWindows()) ".bat" else ""
+        val scripFile = File("$mProjectBasePath/.idea/.shell$suffix")
         //创建文件
         if (!scripFile.exists()) {
             try {
@@ -345,6 +352,7 @@ object Main {
 
         TaskManager.execute(Runnable {
             ///////////
+            Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
             jenkins.getJob(jobName).build(pMap, fMap)
             ///////////
             Log.i("isInQueue:" + jenkins.getJob(jobName)?.isInQueue)
@@ -362,7 +370,6 @@ object Main {
     private val runnable = Runnable {
         val list = jenkins.getJob(jobName).allBuilds
         var goAgain = true
-        Log.i("all Builds ${list?.size}")
         for (item in list) {
             if (item.number == buildNumber) {
                 val ret = if (item.details().result == null) BuildResult.BUILDING else item.details().result
