@@ -275,7 +275,7 @@ object Main {
             Log.i("**************************************")
             Utils.printDog()
             makeMission()
-            Log.i("*****start remote build*****")
+
         })
         return true
     }
@@ -398,6 +398,7 @@ object Main {
             buildState = BUILD_STATE_STARTED
             checkBuildStatus()
             buildState = BUILD_STATE_BUILDING
+            Log.i("*****start remote build*****")
         })
     }
 
