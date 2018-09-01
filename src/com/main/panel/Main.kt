@@ -54,6 +54,10 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
+
+        for (i in 0..3) {
+            println("pluginmain$i")
+        }
         val jobStatus = 10
         if (jobStatus > 0) {
             //非空闲
@@ -194,14 +198,27 @@ object Main {
      * 检测当前job是否空闲
      */
     private fun checkJobIdle(): Int {
-        val list = jenkins.getJob(jobName).allBuilds
         var isBuildingJob = 0
-        if (list != null) {
-            for (item in list) {
-                if (item.details().isBuilding) {
-                    isBuildingJob += 1
+        try {
+            for (i in 0..4) {
+                isBuildingJob = 0
+                val suffix = if (i == 0) "" else i
+                val list = jenkins.getJob(jobName + suffix)?.allBuilds
+                if (list != null) {
+                    for (item in list) {
+                        if (item.details().isBuilding) {
+                            isBuildingJob += 1
+                        }
+                    }
+                    if (isBuildingJob == 0) {
+                        //有空闲的job
+                        this.jobName = jobName + suffix
+                        return 0
+                    }
                 }
             }
+        } catch (e: Exception) {
+            Log.i("e:$e")
         }
         return isBuildingJob
     }
@@ -386,6 +403,8 @@ object Main {
         //trigger a build
         buildNumber = jenkins.getJob(jobName).nextBuildNumber
         Log.i("buildNumber.number:$buildNumber")
+        Log.i("jobName.jobName:$jobName")
+        Log.i("jenkins.jenkins:{${jenkins.getJob(jobName)?.url}}")
         Log.i("pMap:$pMap")
         Log.i("fMap:$fMap")
 

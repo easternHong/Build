@@ -6,7 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45f3cb92-20fc-49cf-a2be-342f3b1b4352" name="Default" comment="" />
+    <list default="true" id="45f3cb92-20fc-49cf-a2be-342f3b1b4352" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Build.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/main/panel/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/panel/Main.kt" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$USER_HOME$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +25,8 @@
       <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="370" column="82" selection-start-line="370" selection-start-column="82" selection-end-line="370" selection-end-column="82" />
+            <state relative-caret-position="534">
+              <caret line="174" column="30" selection-start-line="174" selection-start-column="30" selection-end-line="174" selection-end-column="30" />
               <folding>
                 <element signature="e#24#534#0" expanded="true" />
               </folding>
@@ -42,10 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;revision&quot;</find>
-      <find>create</find>
-      <find>project</find>
-      <find>project.basePath!!</find>
       <find>project.name</find>
       <find>project.basePath</find>
       <find>project.</find>
@@ -56,7 +56,6 @@
       <find>jSubmitBtn.isEnabled</find>
       <find>welc</find>
       <find>input</find>
-      <find>getJob</find>
       <find>WELC</find>
       <find>buildnumber.</find>
       <find>buildNumber.number</find>
@@ -72,6 +71,11 @@
       <find>100</find>
       <find>action</find>
       <find>allbui</find>
+      <find>jobName =</find>
+      <find>getJob</find>
+      <find>branchn</find>
+      <find>jobName</find>
+      <find>重新</find>
     </findStrings>
     <replaceStrings>
       <replace>\&quot;</replace>
@@ -179,33 +183,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Build" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Build" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Build" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Build" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="true" />
@@ -239,174 +217,6 @@
       <recent name="$PROJECT_DIR$/resources/META-INF" />
     </key>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/compiler.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/kotlinc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/com_fasterxml_jackson_core_jackson_annotations_2_3_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/com_fasterxml_jackson_core_jackson_core_2_3_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/com_fasterxml_jackson_core_jackson_databind_2_3_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/com_offbytwo_jenkins_jenkins_client_0_3_8.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/com_squareup_okhttp3_okhttp_3_3_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/dom4j_1_6_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/dom4j_dom4j_1_6_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/org_apache_logging_log4j_log4j_core_2_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/modules.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/vcs.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Build.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/META-INF/plugin.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/icon/g.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/MainTest.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/entry/BuildConfigFile.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/entry/EntryPlugin.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/entry/IConfigFile.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/icon/BuildIcon.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/panel/Main.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/script/Script.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/task/TaskManager.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/Log.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/OsUtils.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/RunCmd.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/SimpleComponentListener.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/Utils.kt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/log/ConsoleThread.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/log/LogTextAreaOutputStream.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/main/utils/log/TextAreaOutputStream.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.DS_Store</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/artifacts/Build__jar.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/.DS_Store</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/svn/subversion.zip</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/artifacts/Build_jar.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_3_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_8_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_common_1_2_61.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/org_apache_logging_log4j_log4j_slf4j_impl_2_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/jenkins-client-0.3.8-SNAPSHOT.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-reflect.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-stdlib-jdk7-sources.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-stdlib-jdk7.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-stdlib-jdk8.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-stdlib.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/kotlin-test.jar</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/svn/Subversion-1.10.2.zip</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -419,7 +229,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.com.main.panel.Main">
+  <component name="RunManager" selected="Plugin.Plugin">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -543,6 +353,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -554,14 +365,14 @@
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.32963988" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24782608" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32934782" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.58804345" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.58766234" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.117451526" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.07867036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.47332576" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4869565" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="8" />
@@ -580,10 +391,10 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24782608" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24782608" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.117451526" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.07867036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -592,10 +403,10 @@
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="ASM" order="6" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.47332576" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4869565" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.5891033" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.58766234" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32934782" />
@@ -624,7 +435,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="195" />
+      <option name="time" value="207" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -677,23 +488,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="341" column="31" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
-          <folding>
-            <element signature="e#24#534#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8.jar!/com/offbytwo/jenkins/helper/Range.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/util/Map.class" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/httpmime-4.5.2.jar!/org/apache/http/entity/mime/content/ContentBody.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -928,10 +722,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/com/intellij/ide/IdeEventQueue.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="1033" selection-start-line="1033" selection-end-line="1033" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/jenkins-client-0.3.8.jar!/com/offbytwo/jenkins/JenkinsServer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/main/panel/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="370" column="82" selection-start-line="370" selection-start-column="82" selection-end-line="370" selection-end-column="82" />
+        <state relative-caret-position="534">
+          <caret line="174" column="30" selection-start-line="174" selection-start-column="30" selection-end-line="174" selection-end-column="30" />
           <folding>
             <element signature="e#24#534#0" expanded="true" />
           </folding>
