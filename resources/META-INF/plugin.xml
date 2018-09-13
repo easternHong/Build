@@ -2,7 +2,6 @@
     <id>com.yy.main</id>
     <name>YY Build</name>
     <version>1.0-snapshot</version>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <description><![CDATA[
       手Y，插件远程编译辅助工具。
@@ -13,7 +12,7 @@
 
     <change-notes><![CDATA[
       alpha<br>
-      <em></em>
+      <em>2018-09-13 更换diff输出目录</em>
     ]]>
     </change-notes>
 
