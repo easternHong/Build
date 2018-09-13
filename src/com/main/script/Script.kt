@@ -9,7 +9,8 @@ object Script {
             "\n" +
             "@echo off\n" +
             "\n" +
-            ".idea\\svn\\bin\\svn  diff >> diff.patch\n" +
+            "break>.idea\\diff.patch\n"+
+            ".idea\\svn\\bin\\svn  diff >> .idea\\diff.patch\n" +
             "\n" +
             "exit"
 
@@ -34,11 +35,11 @@ object Script {
             "else\n" +
             "\techo \"repo_url:\"\$repo_url\n" +
             "fi\n" +
-            ">diff.patch \n" +
-            "svn diff >>diff.patch\n" +
-            "if [ -f \"diff.patch\" ]\n" +
+            "rm -f.idea/diff.patch \n" +
+            "svn diff >> .idea/diff.patch\n" +
+            "if [ -f \".idea/diff.patch\" ]\n" +
             "then\n" +
-            "\techo \"patch_file:\"\$1\"/diff.patch\"\n" +
+            "\techo \"patch_file:\"\$1\"/.idea/diff.patch\"\n" +
             "else\n" +
             "\techo \"patch file not found.\"\n" +
             "fi"

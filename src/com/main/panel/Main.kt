@@ -223,75 +223,58 @@ object Main {
         return isBuildingJob
     }
 
+    private fun createPatchFile() {
+        if (!OsUtils.isWindows()) {
+            Runtime.getRuntime().exec("chmod u+x $mProjectBasePath/.idea/.shell")
+            val list = listOf("$mProjectBasePath/.idea/.shell", mProjectBasePath).toMutableList()
+            val retList = RunCmd.executeShell(list)
+            for (item in retList) {
+                val index = item.indexOf(":")
+                Log.i("createPatchFile:$item")
+                if (index != -1) {
+                    configFile.putProperty(item.substring(0, index), item.substring(index + 1))
+                }
+            }
+        } else {
+            val ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/.shell.bat").toMutableList())
+            Log.i("ret:$ret")
+            val pb = ProcessBuilder("cmd", "/c", "$mProjectBasePath/.idea/.shell.bat")
+            val dir = File(mProjectBasePath)
+            pb.directory(dir)
+            val p = pb.start()
+        }
+    }
+
     private fun work(): Boolean {
         TaskManager.execute(Runnable {
             Log.i("**************************************")
             //创建脚本
             createShellFile()
-            if (!OsUtils.isWindows()) {
-                Runtime.getRuntime().exec("chmod u+x $mProjectBasePath/.idea/.shell")
-                val list = listOf("$mProjectBasePath/.idea/.shell", mProjectBasePath).toMutableList()
-                val retList = RunCmd.executeShell(list)
-                for (item in retList) {
-                    val index = item.indexOf(":")
-                    if (index != -1) {
-                        configFile.putProperty(item.substring(0, index), item.substring(index + 1))
-                    }
-                }
-//                configFile.putProperty(REPO_URL, "https://svn.yy.com/repos/src/dwmobile/pluginhomepage/android/branches/pluginhomepage-android_7.10.0_maint")
-//                configFile.putProperty(REVISION, "2249873")
-//                configFile.putProperty(PATCH_FILE, "/Users/eastern/project/yy/7.10.0_maint/pluginhomepage-android_7.10.0_maint/diff.patch")
-                if (configFile.getProperty(REPO_URL).isNullOrEmpty()) {
-                    Log.i("没有发现svn repo url")
-                    return@Runnable
-                }
-                //get revision
-                if (configFile.getProperty(REVISION).isNullOrEmpty()) {
-                    Log.i("没有发现svn revision")
-                    return@Runnable
-                }
-                //get PATCH_FILE
-                if (configFile.getProperty(PATCH_FILE).isNullOrEmpty()) {
-                    Log.i("没有发现 patch_file")
-//                    return@Runnable
-                }
-            } else {
+            createPatchFile()
+            if (OsUtils.isWindows()) {
                 //get patch_file
-                var ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/.shell.bat").toMutableList())
-                Log.i("ret:$ret")
-                val pb = ProcessBuilder("cmd", "/c", "$mProjectBasePath/.idea/.shell.bat")
-                val dir = File(mProjectBasePath)
-                pb.directory(dir)
-                val p = pb.start()
-
-
-                configFile.putProperty("patch_file", "$mProjectBasePath/diff.patch")
+                configFile.putProperty("patch_file", "$mProjectBasePath/.idea/diff.patch")
                 //get repo_url
-                ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn info --show-item=url",
+                var ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn info --show-item=url",
                         mProjectBasePath).toMutableList())
-                if (ret.size == 0) {
-                    Log.i("没有发现svn repo url")
-                    return@Runnable
+                if (ret.size > 0) {
+                    configFile.putProperty(REPO_URL, ret[0])
                 }
-                configFile.putProperty(REPO_URL, ret[0])
                 //get revision
                 ret = RunCmd.executeShell(listOf("cmd.exe", "/c", "$mProjectBasePath/.idea/svn/bin/svn info --show-item=revision",
                         mProjectBasePath).toMutableList())
-                if (ret.size == 0) {
-                    Log.i("没有发现svn revision")
+                if (ret.size > 0) {
+                    configFile.putProperty(REVISION, ret[0])
+                }
+            }
+            TaskManager.executeDelay(Runnable {
+                if (!checkParameters()) {
                     return@Runnable
                 }
-                configFile.putProperty(REVISION, ret[0])
-            }
-            if (checkParameters()) {
-                //check again
-            } else {
-                //jSubmitBtn.isEnabled = true
-                return@Runnable
-            }
-            Log.i("**************************************")
-            Utils.printDog()
-            makeMission()
+                Log.i("**************************************")
+                Utils.printDog()
+                makeMission()
+            }, 100)
 
         })
         return true
@@ -342,7 +325,6 @@ object Main {
         val patchFile = configFile.getProperty(PATCH_FILE)
         Log.i("patch_file:$patchFile")
         if (!(patchFile != null && File(patchFile).exists())) {
-            Log.i("$mProjectBasePath: can't find patch file")
             goAhead = false
         }
         return goAhead
